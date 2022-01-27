@@ -1,0 +1,30 @@
+.first {
+  background-image: url(../public/icons/wave.svg);
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: bottom;
+  background-size: 100%;
+  height: 100vh;
+}
+.second {
+  background-image: url(../public/icons/wave.svg);
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: bottom;
+  background-size: 100%;
+  height: 100vh;
+  -moz-transform: scaleY(-1);
+  -o-transform: scaleY(-1);
+  -webkit-transform: scaleY(-1);
+  transform: scaleY(-1);
+  filter: FlipV;
+  -ms-filter: "FlipV";
+}
+.content {
+  -moz-transform: scaleY(-1);
+  -o-transform: scaleY(-1);
+  -webkit-transform: scaleY(-1);
+  transform: scaleY(-1);
+  filter: FlipV;
+  -ms-filter: "FlipV";
+}
