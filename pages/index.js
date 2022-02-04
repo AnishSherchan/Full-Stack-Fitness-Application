@@ -1,15 +1,14 @@
 import Image from "next/image";
-import Header from "../src/components/AppHeader/Header.tsx";
-import "bootstrap/dist/css/bootstrap.min.css";
+import Nav from "../src/components/AppHeader/Header.tsx";
 import { Button } from "antd";
-import Badge from "react-bootstrap/Badge";
-import styles from "../styles/Home.module.css";
+import Link from "next/link";
+
 // Index page or landing page design
 export default function Home() {
   return (
     <div className="">
       {/* Navbar for Landing page */}
-      <Header />
+      <Nav buttons={true} />
       {/* Body of the index page */}
       {/* First div */}
       <div
@@ -25,21 +24,22 @@ export default function Home() {
               height={229}
             />
           </div>
-
-          <div className="pt-8 pl-36 ">
-            <Button
-              style={{
-                backgroundColor: "#6B8BFA",
-                borderRadius: "10px",
-                height: "50px",
-                width: "135px",
-                boxShadow: "4px 4px #9A9A9A",
-                border: "none",
-              }}
-            >
-              <p className="text-lg pt-1 text-white">JOIN NOW !</p>
-            </Button>
-          </div>
+          <Link href="/Authentication/Register">
+            <div className="pt-8 pl-36 hover:drop-shadow-xl ">
+              <Button
+                style={{
+                  backgroundColor: "#6B8BFA",
+                  borderRadius: "10px",
+                  height: "50px",
+                  width: "135px",
+                  boxShadow: "4px 4px grey",
+                  border: "none",
+                }}
+              >
+                <p className="text-lg pt-1 text-white">JOIN NOW !</p>
+              </Button>
+            </div>
+          </Link>
         </div>
         <h1>
           <div className="pt-16 ">
@@ -79,18 +79,20 @@ export default function Home() {
             />
           </div>
           <div className="pt-8 pl-6 ">
-            <Button
-              style={{
-                backgroundColor: "#6B8BFA",
-                borderRadius: "10px",
-                height: "50px",
-                width: "195px",
-                boxShadow: "4px 4px #9A9A9A",
-                border: "none",
-              }}
-            >
-              <p className="text-lg pt-1 text-white">TRY IT FOR FREE</p>
-            </Button>
+            <Link href="/Authentication/Register">
+              <Button
+                style={{
+                  backgroundColor: "#6B8BFA",
+                  borderRadius: "10px",
+                  height: "50px",
+                  width: "195px",
+                  boxShadow: "4px 4px #9A9A9A",
+                  border: "none",
+                }}
+              >
+                <p className="text-lg pt-1 text-white">TRY IT FOR FREE</p>
+              </Button>
+            </Link>
           </div>
         </div>
       </div>

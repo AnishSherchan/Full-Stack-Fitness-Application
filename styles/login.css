@@ -1,0 +1,25 @@
+.parent {
+  position: relative;
+}
+.container {
+  height: 440px;
+  width: 590px;
+  border-radius: 30px;
+  background-color: #f3f6f7;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+.login {
+  box-shadow: "3px 3px rgba(0, 0, 0, 0.15)";
+  font-size: "18px";
+  background-color: #607fe8;
+}
+.signup {
+  border-radius: "15px";
+  font-size: "18px";
+}
+.ant-btn-lg {
+  height: 45px;
+}
