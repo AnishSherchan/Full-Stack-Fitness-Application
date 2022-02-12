@@ -28,7 +28,7 @@ export default function Home() {
             <div className="pt-8 pl-36 hover:drop-shadow-xl ">
               <Button
                 style={{
-                  backgroundColor: "#6B8BFA",
+                  backgroundColor: "#607fe8",
                   borderRadius: "10px",
                   height: "50px",
                   width: "135px",
@@ -82,7 +82,7 @@ export default function Home() {
             <Link href="/Authentication/Register">
               <Button
                 style={{
-                  backgroundColor: "#6B8BFA",
+                  backgroundColor: "#607fe8",
                   borderRadius: "10px",
                   height: "50px",
                   width: "195px",

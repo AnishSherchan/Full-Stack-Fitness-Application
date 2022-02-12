@@ -1,10 +1,7 @@
 .parent {
   position: relative;
 }
-.heading {
-  text-shadow: 0px 1px 2px rgb(30 29 39 / 19%), 1px 2px 4px rgb(54 64 147 / 18%);
-}
-.container {
+.Registercontainer {
   height: 440px;
   width: 590px;
   border-radius: 30px;

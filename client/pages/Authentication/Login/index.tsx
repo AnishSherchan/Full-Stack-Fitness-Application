@@ -12,7 +12,7 @@ const index = () => {
     <div className="parent h-screen bg-bgcolor">
       <Header buttons={false} />
       <div className="p-5 mt-14 shadow-xl container ">
-        <h1 className="text-3xl mt-5 text-center">Welcome Back</h1>
+        <h1 className="text-3xl mt-5 heading text-center">Welcome Back</h1>
         <div className="mt-14 px-8">
           <Form
             name="normal_login"
@@ -83,6 +83,7 @@ const index = () => {
                     fontWeight: "bold",
                     boxShadow: "3px 3px rgba(0, 0, 0, 0.15)",
                     color: "#607FE8",
+                    border: "1px solid #D0D0D0",
                   }}
                   block
                 >
