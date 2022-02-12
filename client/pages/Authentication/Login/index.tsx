@@ -1,13 +1,52 @@
 import Header from "@components/AppHeader/Header";
 import Link from "next/Link";
+import { useState } from "react";
 import { Form, Input, Button } from "antd";
+import { toast } from "react-toastify";
 import { UserOutlined, LockOutlined } from "@ant-design/icons";
-
-const onFinish = (values: any) => {
-  console.log("Received values of form: ", values);
-};
-
+import { useRouter } from "next/router";
 const index = () => {
+  const router = useRouter();
+  const [inputs, setInputs] = useState({
+    email: "",
+    password: "",
+  });
+
+  const onFinish = async (values: any) => {
+    const { email, password } = values;
+    try {
+      const body = { email, password };
+      const response = await fetch("http://localhost:5000/auth/login", {
+        method: "POST",
+        headers: {
+          "Content-type": "application/json",
+        },
+        body: JSON.stringify(body),
+        // ? converting object to json
+      });
+
+      const parseRes = await response.json();
+
+      if (parseRes.token) {
+        localStorage.setItem("token", parseRes.token);
+        toast.success("Logged in Successfully", {
+          position: "top-center",
+          autoClose: 3000,
+          hideProgressBar: true,
+          closeOnClick: true,
+          pauseOnHover: false,
+          draggable: true,
+          progress: undefined,
+        });
+        router.push("/dashboard");
+      } else {
+        toast.error(parseRes);
+      }
+    } catch (err) {
+      console.error(err.message);
+    }
+  };
+
   return (
     <div className="parent h-screen bg-bgcolor">
       <Header buttons={false} />
@@ -21,10 +60,8 @@ const index = () => {
             onFinish={onFinish}
           >
             <Form.Item
-              name="username"
-              rules={[
-                { required: true, message: "Please input your Username!" },
-              ]}
+              name="email"
+              rules={[{ required: true, message: "Please input your email!" }]}
             >
               <Input
                 size="large"

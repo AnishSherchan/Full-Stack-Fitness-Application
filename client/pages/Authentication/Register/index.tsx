@@ -1,11 +1,44 @@
 import Header from "@components/AppHeader/Header";
+import React, { useState } from "react";
 import Link from "next/Link";
+import { toast } from "react-toastify";
+import { useRouter } from "next/router";
 import { Form, Input, Button } from "antd";
 import { UserOutlined, LockOutlined } from "@ant-design/icons";
-const onFinish = (values: any) => {
-  console.log("Received values of form: ", values);
-};
+
 const index = () => {
+  const router = useRouter();
+  const [inputs, setInputs] = useState({
+    email: "",
+    password: "",
+    name: "",
+  });
+
+  const onFinish = async (values: any) => {
+    console.log("Received values of form: ", values);
+    const { email, password, name } = values;
+    try {
+      const body = { email, password, name };
+      const response = await fetch("http://localhost:5000/auth/register", {
+        method: "POST",
+        headers: {
+          "Content-type": "application/json",
+        },
+        body: JSON.stringify(body),
+      });
+      const parseRes = await response.json();
+      console.log(parseRes);
+      if (parseRes.token) {
+        localStorage.setItem("token", parseRes.token);
+        toast.success("User Registered");
+        router.push("/dashboard");
+      } else {
+        toast.error(parseRes);
+      }
+    } catch (err) {
+      console.error(err.message);
+    }
+  };
   return (
     <div className="parent h-screen bg-bgcolor">
       <Header buttons={false} />
@@ -21,7 +54,7 @@ const index = () => {
             onFinish={onFinish}
           >
             <Form.Item
-              name="username"
+              name="email"
               rules={[
                 { required: true, message: "Please input your Username!" },
               ]}
@@ -57,7 +90,7 @@ const index = () => {
             </Form.Item>
 
             <Form.Item
-              name="Name"
+              name="name"
               rules={[{ required: true, message: "Please enter your name!" }]}
             >
               <Input
