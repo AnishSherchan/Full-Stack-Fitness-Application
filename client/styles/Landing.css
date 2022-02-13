@@ -28,3 +28,18 @@
   filter: FlipV;
   -ms-filter: "FlipV";
 }
+@media screen and (max-width: 767px) {
+  .landingImg {
+    display: none;
+  }
+  .landingcont {
+    padding: 0px;
+  }
+  .first {
+    height: fit-content;
+  }
+  .second,
+  .contmain {
+    height: fit-content;
+  }
+}

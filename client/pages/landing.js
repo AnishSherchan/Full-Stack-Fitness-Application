@@ -7,18 +7,18 @@ import Link from "next/link";
 
 const landing = () => {
   return (
-    <div className="">
+    <div className="contmain">
       {/* Navbar for Landing page */}
-      <Nav buttons={true} />
+      <Nav buttons={true} verifyContent={false} />
 
       {/* Body of the index page */}
       {/* First div */}
       <div
-        className="first h-screen grid grid-cols-2 bg-bgcolor "
+        className="first grid md:grid-cols-2 "
         // styles={{ backgroundImage: `url(${Background})` }}
       >
         <div>
-          <div className="pt-28 pl-28">
+          <div className="landingcont pt-28 pl-28">
             <Image
               src="/icons/Title1.svg"
               alt="Logo"
@@ -27,7 +27,7 @@ const landing = () => {
             />
           </div>
           <Link href="/Authentication/Register">
-            <div className="pt-8 pl-36 hover:drop-shadow-xl ">
+            <div className=" pt-8 pl-36 hover:drop-shadow-xl ">
               <Button
                 style={{
                   backgroundColor: "#607fe8",
@@ -44,7 +44,7 @@ const landing = () => {
           </Link>
         </div>
         <h1>
-          <div className="pt-16 ">
+          <div className="landingImg pt-16 ">
             <Image
               src="/icons/Trainer.svg"
               alt="Logo"
@@ -57,12 +57,12 @@ const landing = () => {
       {/* Background image inverted */}
       {/* Second div for page */}
       <div
-        className="second h-screen grid grid-cols-2 bg-bgcolor"
+        className="second grid md:grid-cols-2"
         // styles={{ backgroundImage: `url(${Background})` }}
       >
         {/* Using content to invert image */}
         <div className="content">
-          <div className="pt-40 pl-10">
+          <div className=" landingImg pt-40 pl-10">
             <Image
               src="/icons/Traning.svg"
               alt="Logo"
@@ -71,7 +71,7 @@ const landing = () => {
             />
           </div>
         </div>
-        <div className="content pt-52 pl-28">
+        <div className="landingcont content pt-52 pl-28">
           <div>
             <Image
               src="/icons/Title2.svg"
@@ -99,7 +99,7 @@ const landing = () => {
         </div>
       </div>
       {/* Footer */}
-      <div className="bg-gray-900">
+      <div className="bg-gray-900 ">
         <Image src="/icons/footer.svg" alt="Title" width={1550} height={295} />
       </div>
     </div>

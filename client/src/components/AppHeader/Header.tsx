@@ -9,7 +9,7 @@ interface Props {
 const Header = (props: Props) => {
   const [isOpen, setIsOpen] = useState(false);
   return (
-    <div className=" drop-shadow z-10 sticky top-0 left-0 right-0">
+    <div className=" drop-shadow-lg z-10 sticky top-0 left-0 right-0">
       <nav className="bg-navcolor">
         <div className=" mx-auto sm:px-6  px-4 lg:px-5">
           <div className="flex items-center justify-center h-24">
@@ -20,7 +20,7 @@ const Header = (props: Props) => {
                     className=""
                     src="/icons/Logo.svg"
                     alt="Logo"
-                    width={280}
+                    width={270}
                     height={90}
                   />
                 </Link>
@@ -134,7 +134,7 @@ const Header = (props: Props) => {
               <div ref={ref} className="px-2 pt-2 pb-3 space-y-1 sm:px-3">
                 {props.buttons == true && (
                   <>
-                    <a href="#" className="block text-black">
+                    <a href="#" className="block text-xl text-black">
                       Login
                     </a>
 
@@ -145,31 +145,13 @@ const Header = (props: Props) => {
                 )}
                 {props.verifyContent == true && (
                   <>
-                    <Link href="/Authentication/Login">
-                      <button className="px-5">
-                        <p className="text-lg font-normal">dashboard</p>
-                      </button>
-                    </Link>
-                    <Link href="/Authentication/Register">
-                      <button className="px-5">
-                        <p className="text-lg font-normal">Workout</p>
-                      </button>
-                    </Link>
-                    <Link href="/Authentication/Login">
-                      <button className="px-5">
-                        <p className="text-lg font-normal">Exercise</p>
-                      </button>
-                    </Link>
-                    <Link href="/Authentication/Login">
-                      <button className="px-5">
-                        <p className="text-lg font-normal">supplement</p>
-                      </button>
-                    </Link>
-                    <Link href="/Authentication/Login">
-                      <button className="px-5">
-                        <p className="text-lg font-normal">Todo</p>
-                      </button>
-                    </Link>
+                    <a href="#" className="block text-black">
+                      Login
+                    </a>
+
+                    <a href="#" className="block text-black ">
+                      Sign Up
+                    </a>
                   </>
                 )}
               </div>
