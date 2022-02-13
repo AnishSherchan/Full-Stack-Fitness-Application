@@ -12,28 +12,7 @@ import Dashboard from "../pages/Dashboard";
 import { route } from "next/dist/server/router";
 
 export default function Home() {
-  const router = useRouter();
-  // ?Authnetication useState for user Authentication
-  const [isAuthenticated, setAuthenticated] = useState(false);
-  const setAuth = (boolean) => {
-    setAuthenticated(boolean);
-  };
-  // ? We check if the user has token or not using is-verify API
-  const isAuth = async () => {
-    const rsponse = await fetch("http://localhost:5000/auth/is-verify", {
-      method: "GET",
-      headers: {
-        token: localStorage.token,
-      },
-    });
-    const parseRes = await rsponse.json();
-    parseRes === true ? setAuthenticated(true) : setAuthenticated(false);
-  };
-  //? Here we are making browser to run isAuth function once the whole page mounts
-  useEffect(() => {
-    isAuth();
-  }, []);
-
+  // ! Secure routes for navigation
   return (
     <div>
       <Landing />

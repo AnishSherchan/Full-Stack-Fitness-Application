@@ -48,87 +48,91 @@ const index = () => {
   };
 
   return (
-    <div className="parent h-screen bg-bgcolor">
+    <div>
       <Header buttons={false} />
-      <div className="p-5 mt-14 shadow-xl container ">
-        <h1 className="text-3xl mt-5 heading text-center">Welcome Back</h1>
-        <div className="mt-14 px-8">
-          <Form
-            name="normal_login"
-            className="login-form"
-            initialValues={{ remember: true }}
-            onFinish={onFinish}
-          >
-            <Form.Item
-              name="email"
-              rules={[{ required: true, message: "Please input your email!" }]}
+      <div className="md:flex md:flex-col md:items-center">
+        <div className=" h-fitcontent md:w-5/12 md:bg-navcolor rounded-3xl drop-shadow-2xl md:mt-16">
+          <h1 className="text-2xl mt-10 heading text-center">Welcome Back</h1>
+          <div className="mt-10 px-8 mb-12">
+            <Form
+              name="normal_login"
+              className="login-form"
+              initialValues={{ remember: true }}
+              onFinish={onFinish}
             >
-              <Input
-                size="large"
-                style={{
-                  height: "50px",
-                  borderRadius: "10px",
-                  fontSize: "25px",
-                }}
-                prefix={<UserOutlined className="site-form-item-icon" />}
-                placeholder="Enter your Email"
-              />
-            </Form.Item>
-            <Form.Item
-              name="password"
-              rules={[
-                { required: true, message: "Please input your Password!" },
-              ]}
-            >
-              <Input.Password
-                size="large"
-                style={{
-                  height: "50px",
-                  borderRadius: "10px",
-                  fontSize: "25px",
-                }}
-                prefix={<LockOutlined className="site-form-item-icon" />}
-                type="password"
-                placeholder="Enter your Password!"
-              />
-            </Form.Item>
-
-            <Form.Item>
-              <Button
-                size="large"
-                type="primary"
-                htmlType="submit"
-                className="login"
-                style={{
-                  borderRadius: "15px",
-                  fontSize: "18px,",
-                  fontWeight: "bold",
-                  boxShadow: "3px 3px rgba(0, 0, 0, 0.15)",
-                }}
-                block
+              <Form.Item
+                name="email"
+                rules={[
+                  { required: true, message: "Please input your email!" },
+                ]}
               >
-                Log in
-              </Button>
-            </Form.Item>
-            <Form.Item>
-              <Link href="/Authentication/Register">
+                <Input
+                  size="large"
+                  style={{
+                    height: "50px",
+                    borderRadius: "10px",
+                    fontSize: "25px",
+                  }}
+                  prefix={<UserOutlined className="site-form-item-icon" />}
+                  placeholder="Enter your Email"
+                />
+              </Form.Item>
+              <Form.Item
+                name="password"
+                rules={[
+                  { required: true, message: "Please input your Password!" },
+                ]}
+              >
+                <Input.Password
+                  size="large"
+                  style={{
+                    height: "50px",
+                    borderRadius: "10px",
+                    fontSize: "25px",
+                  }}
+                  prefix={<LockOutlined className="site-form-item-icon" />}
+                  type="password"
+                  placeholder="Enter your Password!"
+                />
+              </Form.Item>
+
+              <Form.Item>
                 <Button
                   size="large"
+                  type="primary"
+                  htmlType="submit"
+                  className="login"
                   style={{
                     borderRadius: "15px",
                     fontSize: "18px,",
                     fontWeight: "bold",
                     boxShadow: "3px 3px rgba(0, 0, 0, 0.15)",
-                    color: "#607FE8",
-                    border: "1px solid #D0D0D0",
                   }}
                   block
                 >
-                  Create An Account
+                  Log in
                 </Button>
-              </Link>
-            </Form.Item>
-          </Form>
+              </Form.Item>
+              <Form.Item>
+                <Link href="/Authentication/Register">
+                  <Button
+                    size="large"
+                    style={{
+                      borderRadius: "15px",
+                      fontSize: "18px,",
+                      fontWeight: "bold",
+                      boxShadow: "3px 3px rgba(0, 0, 0, 0.15)",
+                      color: "#607FE8",
+                      border: "1px solid #D0D0D0",
+                    }}
+                    block
+                  >
+                    Create An Account
+                  </Button>
+                </Link>
+              </Form.Item>
+            </Form>
+          </div>
         </div>
       </div>
     </div>
