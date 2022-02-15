@@ -7,7 +7,7 @@ import { Button, Typography, Divider, Radio, Input } from "antd";
 import Image from "next/image";
 import { toast } from "react-toastify";
 import Verify from "./HOC/Verify";
-
+// Check
 const dashboard = () => {
   const { Paragraph } = Typography;
   // ? Global Varibale which must be stored in Redux
