@@ -8,6 +8,7 @@ module.exports = {
       colors: {
         bgcolor: "#E1E5E8",
         navcolor: "#F3F6F7",
+        dark: "#474C52",
         primaryButton: "#607FE8",
       },
     },

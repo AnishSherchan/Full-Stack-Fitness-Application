@@ -49,7 +49,7 @@ const index = () => {
 
   return (
     <div>
-      <Header buttons={false} />
+      <Header buttons={false} verifyContent={false} />
       <div className="md:flex md:flex-col md:items-center">
         <div className=" h-fitcontent md:w-5/12 md:bg-navcolor rounded-3xl drop-shadow-2xl md:mt-16">
           <h1 className="text-2xl mt-10 heading text-center">Welcome Back</h1>

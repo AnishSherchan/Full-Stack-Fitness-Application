@@ -1,13 +1,32 @@
+// Todo CHANGE href to Link
 import Image from "next/image";
 import React, { useState } from "react";
 import Link from "next/link";
+import { toast } from "react-toastify";
 import { Transition } from "@headlessui/react";
 interface Props {
   buttons: Boolean;
   verifyContent: Boolean;
+  CurrentPage: number;
 }
 const Header = (props: Props) => {
+  let Flag = false;
   const [isOpen, setIsOpen] = useState(false);
+  if (props.verifyContent == false && props.buttons == false) {
+    Flag = true;
+  }
+  const Click = () => {
+    localStorage.removeItem("token");
+    toast.success("Logged out Successfully", {
+      position: "top-center",
+      autoClose: 3000,
+      hideProgressBar: true,
+      closeOnClick: true,
+      pauseOnHover: false,
+      draggable: true,
+      progress: undefined,
+    });
+  };
   return (
     <div className=" drop-shadow-lg z-10 sticky top-0 left-0 right-0">
       <nav className="bg-navcolor">
@@ -15,15 +34,13 @@ const Header = (props: Props) => {
           <div className="flex items-center justify-center h-24">
             <div className="flex w-full  justify-between items-center">
               <div className="flex-shrink-0">
-                <Link href="/">
-                  <Image
-                    className=""
-                    src="/icons/Logo.svg"
-                    alt="Logo"
-                    width={270}
-                    height={90}
-                  />
-                </Link>
+                <Image
+                  className=""
+                  src="/icons/Logo.svg"
+                  alt="Logo"
+                  width={270}
+                  height={90}
+                />
               </div>
               <div className=" hidden lg:block pr-9">
                 {props.buttons == true && (
@@ -44,32 +61,66 @@ const Header = (props: Props) => {
                 )}
                 {props.verifyContent == true && (
                   <div className="ml-10 flex items-baseline space-x-4">
-                    <Link href="/Authentication/Login">
-                      <button className="px-5">
-                        <p className="text-lg font-normal">dashboard</p>
-                      </button>
+                    <Link href="/dashboard">
+                      <a
+                        style={
+                          props.CurrentPage === 1 ? { color: "#4B8CF6" } : {}
+                        }
+                        className="block px-3 text-xl text-black"
+                      >
+                        Dashboard
+                      </a>
                     </Link>
-                    <Link href="/Authentication/Register">
-                      <button className="px-5">
-                        <p className="text-lg font-normal">Workout</p>
-                      </button>
+
+                    <Link href="/">
+                      <a
+                        style={
+                          props.CurrentPage === 2 ? { color: "#4B8CF6" } : {}
+                        }
+                        className="block px-3 text-xl text-black"
+                      >
+                        Plan
+                      </a>
                     </Link>
-                    <Link href="/Authentication/Login">
-                      <button className="px-5">
-                        <p className="text-lg font-normal">Exercise</p>
-                      </button>
+
+                    <Link href="/">
+                      <a
+                        style={
+                          props.CurrentPage === 3 ? { color: "#4B8CF6" } : {}
+                        }
+                        className="block px-3 text-xl text-black"
+                      >
+                        Exercise Guid
+                      </a>
                     </Link>
-                    <Link href="/Authentication/Login">
-                      <button className="px-5">
-                        <p className="text-lg font-normal">supplement</p>
-                      </button>
+
+                    <Link href="/">
+                      <a
+                        style={
+                          props.CurrentPage === 4 ? { color: "#4B8CF6" } : {}
+                        }
+                        className="block px-3 text-xl text-black"
+                      >
+                        Supplement
+                      </a>
                     </Link>
-                    <Link href="/Authentication/Login">
-                      <button className="px-5">
-                        <p className="text-lg font-normal">Todo</p>
+
+                    <Link href="/">
+                      <button onClick={Click} className="px-3 cursor-pointer">
+                        <Image
+                          src="/icons/Logout.svg"
+                          alt="Logo"
+                          width={22}
+                          height={22}
+                        />
                       </button>
                     </Link>
                   </div>
+                )}
+                {Flag == true && (
+                  <Link href="/">
+                    <a className="block px-3 text-xl text-black">Home</a>
+                  </Link>
                 )}
               </div>
             </div>
@@ -134,25 +185,45 @@ const Header = (props: Props) => {
               <div ref={ref} className="px-2 pt-2 pb-3 space-y-1 sm:px-3">
                 {props.buttons == true && (
                   <>
-                    <a href="#" className="block text-xl text-black">
-                      Login
-                    </a>
+                    <Link href="/Authentication/Login">
+                      <a className="block text-xl text-black">Login</a>
+                    </Link>
 
-                    <a href="#" className="block text-black ">
-                      Sign Up
-                    </a>
+                    <Link href="/Authentication/Register">
+                      <a className="block text-xl text-black">Sign Up</a>
+                    </Link>
                   </>
                 )}
                 {props.verifyContent == true && (
                   <>
-                    <a href="#" className="block text-black">
-                      Login
-                    </a>
+                    <Link href="/dashboard">
+                      <a className="block text-xl text-black">Dashboard</a>
+                    </Link>
 
-                    <a href="#" className="block text-black ">
-                      Sign Up
-                    </a>
+                    <Link href="/">
+                      <a className="block text-xl text-black">Plan</a>
+                    </Link>
+
+                    <Link href="/">
+                      <a className="block text-xl text-black">Exercise Guid</a>
+                    </Link>
+
+                    <Link href="/">
+                      <a className="block text-xl text-black">Supplement</a>
+                    </Link>
+
+                    <Link href="/">
+                      <a onClick={Click} className="block text-xl text-black">
+                        Logout
+                      </a>
+                    </Link>
                   </>
+                )}
+
+                {Flag == true && (
+                  <Link href="/">
+                    <a className="block px-3 text-xl text-black">Home</a>
+                  </Link>
                 )}
               </div>
             </div>

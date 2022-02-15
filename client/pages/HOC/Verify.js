@@ -18,7 +18,6 @@ const Verify = (WrappedComponent) => {
         } else {
           notVerified = false;
         }
-        console.log(notVerified);
         if (notVerified == false) {
           localStorage.removeItem("token");
           router.push("/");

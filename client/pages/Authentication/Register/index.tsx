@@ -15,7 +15,6 @@ const index = () => {
   });
 
   const onFinish = async (values: any) => {
-    console.log("Received values of form: ", values);
     const { email, password, name } = values;
     try {
       const body = { email, password, name };
@@ -27,10 +26,17 @@ const index = () => {
         body: JSON.stringify(body),
       });
       const parseRes = await response.json();
-      console.log(parseRes);
       if (parseRes.token) {
         localStorage.setItem("token", parseRes.token);
-        toast.success("User Registered");
+        toast.success("User Registered", {
+          position: "top-center",
+          autoClose: 3000,
+          hideProgressBar: true,
+          closeOnClick: true,
+          pauseOnHover: false,
+          draggable: true,
+          progress: undefined,
+        });
         router.push("/dashboard");
       } else {
         toast.error(parseRes);
@@ -41,7 +47,7 @@ const index = () => {
   };
   return (
     <div>
-      <Header buttons={false} />
+      <Header buttons={false} verifyContent={false} CurrentPage={0} />
       <div className="md:flex md:flex-col md:items-center">
         <div className=" h-fitcontent md:w-5/12 md:bg-navcolor rounded-3xl drop-shadow-2xl md:mt-11">
           <h1 className="text-2xl mt-10 heading text-center">
