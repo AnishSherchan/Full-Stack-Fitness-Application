@@ -73,7 +73,6 @@ const dashboard = () => {
           <div className="md:flex justify-center  ">
             <div className="py-6 md:flex hidden flex-shrink-0">
               <Image
-                className=""
                 src="/icons/User.svg"
                 alt="Logo"
                 width={315}
