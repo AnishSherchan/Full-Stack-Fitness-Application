@@ -9,7 +9,7 @@ const landing = () => {
   return (
     <div className="contmain">
       {/* Navbar for Landing page */}
-      <Nav buttons={true} verifyContent={false} />
+      <Nav buttons={true} verifyContent={false} CurrentPage={0} />
 
       {/* Body of the index page */}
       {/* First div */}
