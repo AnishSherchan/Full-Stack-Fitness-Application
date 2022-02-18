@@ -166,6 +166,23 @@ const dashboard = () => {
                   <p className="text-lg pt-1 text-white">Save Changes</p>
                 </Button>
               </div>
+              <div className=" pt-2 md:px-3 hover:drop-shadow-xl ">
+                <Button
+                  style={{
+                    backgroundColor: "#607fe8",
+                    borderRadius: "10px",
+                    height: "45px",
+                    width: "250px",
+                    boxShadow: "1px 1px grey",
+                    border: "none",
+                  }}
+                  onClick={InputValue}
+                >
+                  <p className="text-lg pt-1 text-white">
+                    Edit your Health Condition
+                  </p>
+                </Button>
+              </div>
             </div>
             <p className="text-center text-blue-500 cursor-pointer ">
               Erase profile

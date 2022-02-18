@@ -72,7 +72,7 @@ const Header = (props: Props) => {
                       </a>
                     </Link>
 
-                    <Link href="/">
+                    <Link href="/plan">
                       <a
                         style={
                           props.CurrentPage === 2 ? { color: "#4B8CF6" } : {}
@@ -200,7 +200,7 @@ const Header = (props: Props) => {
                       <a className="block text-xl text-black">Dashboard</a>
                     </Link>
 
-                    <Link href="/">
+                    <Link href="/plan">
                       <a className="block text-xl text-black">Plan</a>
                     </Link>
 
