@@ -1,5 +1,6 @@
 import React from "react";
 import { Button } from "antd";
+import Link from "next/link";
 const index = () => {
   return (
     <div className="md:px-32">
@@ -7,18 +8,20 @@ const index = () => {
         <p className="text-white md:text-lg ">Skull Crushes</p>
         <p className="text-white md:text-lg">Target Area: Triceps</p>
         <p className="hidden md:block text-white md:text-lg">Type: Compound</p>
-        <Button
-          size="middle"
-          style={{
-            backgroundColor: "#607fe8",
-            borderRadius: "10px",
-            boxShadow: "1px 1px grey",
-            color: "white",
-            border: "none",
-          }}
-        >
-          Learn more
-        </Button>
+        <Link href="/exercise/info">
+          <Button
+            size="middle"
+            style={{
+              backgroundColor: "#607fe8",
+              borderRadius: "10px",
+              boxShadow: "1px 1px grey",
+              color: "white",
+              border: "none",
+            }}
+          >
+            Learn more
+          </Button>
+        </Link>
       </div>
     </div>
   );

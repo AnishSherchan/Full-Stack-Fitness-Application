@@ -10,6 +10,7 @@ module.exports = {
         navcolor: "#F3F6F7",
         dark: "#474C52",
         primaryButton: "#607FE8",
+        back: "#005599",
       },
     },
   },

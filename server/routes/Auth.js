@@ -83,4 +83,26 @@ router.get("/is-verify", authorization, async (req, res) => {
   }
 });
 
+router.get("/admin", authorization, async (req, res) => {
+  try {
+    const user = await pool.query("SELECT * FROM users WHERE user_id = $1", [
+      req.user,
+    ]);
+    res.json(user.rows[0].isadmin);
+  } catch (error) {
+    console.error(error.message);
+    res.status(500).json("Server error");
+  }
+});
+
+router.get("/exercise", async (req, res) => {
+  try {
+    const Exercises = await pool.query("SELECT * FROM exercises");
+    res.json(Exercises.rows);
+  } catch (error) {
+    console.error(error.message);
+    res.status(500).json("Server error");
+  }
+});
+
 module.exports = router;

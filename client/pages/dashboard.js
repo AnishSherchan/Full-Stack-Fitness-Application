@@ -68,7 +68,7 @@ const dashboard = () => {
         // ? First Tag
       }
       <div className="md:flex md:flex-col md:pb-5 md:items-center">
-        <div className="h-fitcontent md:w-8/12 md:py-5 md:bg-navcolor rounded-3xl drop-shadow-2xl md:mt-11">
+        <div className="h-fitcontent md:w-8/12 md:py-3 py-2 bg-navcolor rounded-3xl drop-shadow-2xl md:mt-11">
           <h1 className="text-2xl mt-5 px-10 text-center ">User Profile</h1>
           <div className="md:flex justify-center  ">
             <div className="py-6 md:flex hidden flex-shrink-0">
@@ -184,16 +184,17 @@ const dashboard = () => {
                 </Button>
               </div>
             </div>
-            <p className="text-center text-blue-500 cursor-pointer ">
-              Erase profile
-            </p>
+            <div className="flex flex-wrap flex-col">
+              <a className="text-center p-2 cursor-pointer ">Advance edit</a>
+              <a className="text-center  cursor-pointer ">Erase profile</a>
+            </div>
           </div>
         </div>
       </div>
       {
         // ?Second Tag
       }
-      <div className="px-5 md:bg-dark pb-6">
+      <div className="px-5 py-3 md:bg-dark pb-6">
         <h1 className="text-2xl md:pt-6 md:text-white px-10 text-center ">
           Body Metric
         </h1>

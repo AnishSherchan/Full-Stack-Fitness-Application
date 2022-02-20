@@ -180,9 +180,9 @@ const Header = (props: Props) => {
           leaveFrom="opacity-100 scale-100"
           leaveTo="opacity-0 scale-95"
         >
-          {(ref) => (
+          {(useRef) => (
             <div className="lg:hidden" id="mobile-menu">
-              <div ref={ref} className="px-2 pt-2 pb-3 space-y-1 sm:px-3">
+              <div ref={useRef} className="px-2 pt-2 pb-3 space-y-1 sm:px-3">
                 {props.buttons == true && (
                   <>
                     <Link href="/Authentication/Login">

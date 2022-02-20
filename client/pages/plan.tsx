@@ -1,10 +1,27 @@
-import React from "react";
+import React, { useEffect } from "react";
 import Image from "next/image";
 import Verify from "./HOC/Verify";
 import PlanInfo from "../src/components/Plan";
 import { Radio, Input } from "antd";
 import Nav from "../src/components/AppHeader/Header";
 const plan = () => {
+  // const getUser = async () => {
+  //   try {
+  //     const response = await fetch("http://localhost:5000/auth/admin", {
+  //       method: "get",
+  //       headers: {
+  //         token: localStorage.token,
+  //       },
+  //     });
+  //     const parseRes = await response.json();
+  //     console.log(parseRes == "admin");
+  //   } catch (error) {
+  //     console.log(error.message);
+  //   }
+  // };
+  // useEffect(() => {
+  //   getUser();
+  // }, []);
   return (
     <div>
       <Nav buttons={false} verifyContent={true} CurrentPage={2} />
