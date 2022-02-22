@@ -28,7 +28,7 @@ router.post("/register", validInfo, async (req, res) => {
     const bcryptPassword = await bcrypt.hash(password, salt);
     //?  insert user data
     let newUser = await pool.query(
-      "INSERT INTO users (user_name, user_email, user_password, isadmin) VALUES ($1, $2, $3, 'user') RETURNING *",
+      "INSERT INTO users (user_name, user_email, user_password, user_role,account_status) VALUES ($1, $2, $3, 'user','Active') RETURNING *",
       [name, email, bcryptPassword]
     );
     // ? Generating jwttoken

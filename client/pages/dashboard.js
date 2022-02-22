@@ -2,13 +2,14 @@
 // Todo Create Save Changes Function
 // Todo Create BMI calculate Function
 import React, { useState, useEffect } from "react";
+import { useRouter } from "next/router";
 import Nav from "../src/components/AppHeader/Header.tsx";
 import { Button, Typography, Divider, Radio, Input } from "antd";
 import Image from "next/image";
 import { toast } from "react-toastify";
 import Verify from "./HOC/Verify";
-
 const dashboard = () => {
+  const router = useRouter();
   const { Paragraph } = Typography;
   // ? Global Varibale which must be stored in Redux
   const [name, setname] = useState("");
@@ -42,6 +43,23 @@ const dashboard = () => {
   const onChange = (e) => {
     console.log(e.target.value);
   };
+  const getUserInfo = async () => {
+    try {
+      const response = await fetch("http://localhost:5000/dashboard/userinfo", {
+        method: "get",
+        headers: {
+          token: localStorage.token,
+        },
+      });
+      const parseRes = await response.json();
+      if (parseRes == 0) {
+        router.push("/Authentication/Register/info");
+      }
+    } catch (error) {
+      console.log(error.message);
+    }
+  };
+
   const getUser = async () => {
     try {
       const response = await fetch("http://localhost:5000/dashboard/", {
@@ -58,6 +76,8 @@ const dashboard = () => {
     }
   };
   useEffect(() => {
+    getUserInfo();
+
     getUser();
   }, []);
   return (
