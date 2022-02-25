@@ -4,7 +4,7 @@
 import React, { useState, useEffect } from "react";
 import { useRouter } from "next/router";
 import Nav from "../src/components/AppHeader/Header.tsx";
-import { Button, Typography, Divider, Radio, Input } from "antd";
+import { Button, Typography, Popover, Divider, Radio, Input } from "antd";
 import Image from "next/image";
 import { toast } from "react-toastify";
 import Verify from "./HOC/Verify";
@@ -14,9 +14,31 @@ const dashboard = () => {
   // ? Global Varibale which must be stored in Redux
   const [name, setname] = useState("");
   const [userid, setuserid] = useState("");
+  const [goal, setusergoal] = useState("");
+  const [dob, setdob] = useState("");
+  const [height, setheight] = useState("");
+  const [weight, setweight] = useState("");
+  const [BMI, setBMI] = useState("");
   // ?Weight and height detail for users edit
   let h1 = 0;
   let w1 = 0;
+
+  // ? popover content
+  const content = (
+    <div>
+      {BMI <= 18.5 && (
+        <p>Underweight, we suggest you to start Muscle building program</p>
+      )}
+      {BMI <= 24.9 && BMI > 18.5 && <p>Normal Weight, Perfect!</p>}
+      {BMI < 29.9 && BMI > 25 && (
+        <p>Overweight, Slightly overweight start loosing weight</p>
+      )}
+      {BMI > 30 && (
+        <p>Obesity, we suggest you to start fat loss program ASAP!</p>
+      )}
+    </div>
+  );
+
   const UserinputHeight = (e) => {
     h1 = e.target.value;
   };
@@ -25,9 +47,59 @@ const dashboard = () => {
   };
   // ? Submit event for editing Weight Height of Edit and BMI
 
-  const InputValue = () => {
+  // ? Ipnut value for Edit profile
+  // Todo use same func fro Calulating BMI
+  const InputValue = async () => {
     if (h1 !== 0 && w1 !== 0) {
-      console.log("Value submited");
+      let selectedHeight = h1;
+      let selectedWeight = w1;
+      console.log("Value submited", selectedHeight, " ", selectedWeight);
+
+      try {
+        const body = { selectedHeight, selectedWeight };
+        const response = await fetch(
+          "http://localhost:5000/dashboard/userheightweight",
+          {
+            method: "PUT",
+            headers: {
+              token: localStorage.token,
+              "Content-type": "application/json",
+            },
+            body: JSON.stringify(body),
+          }
+        );
+        const parseRes = await response.json();
+        console.log(parseRes);
+      } catch (error) {
+        console.log(error.message);
+      }
+
+      plana.value = "";
+      planb.value = "";
+      h1 = 0;
+      w1 = 0;
+    } else
+      toast.error("All Filed must be field", {
+        position: "top-center",
+        autoClose: 3000,
+        hideProgressBar: true,
+        closeOnClick: true,
+        pauseOnHover: false,
+        draggable: true,
+        progress: undefined,
+      });
+  };
+
+  const bmi = async () => {
+    if (h1 !== 0 && w1 !== 0) {
+      let BMIHeight = h1.substring(0, 1) + "." + h1.substring(1, 3);
+      let HeightSq = BMIHeight * BMIHeight;
+      let userBMI = w1 / HeightSq;
+      setBMI(userBMI.toFixed(1));
+      planc.value = "";
+      pland.value = "";
+      h1 = 0;
+      w1 = 0;
     } else
       toast.error("All Filed must be field", {
         position: "top-center",
@@ -41,8 +113,55 @@ const dashboard = () => {
   };
 
   const onChange = (e) => {
-    console.log(e.target.value);
+    setusergoal(e.target.value);
+    userGoal(e.target.value);
   };
+
+  // ? User Goal post method
+  const userGoal = async (selectedgoal) => {
+    try {
+      const body = { selectedgoal };
+      const response = await fetch("http://localhost:5000/dashboard/usergoal", {
+        method: "PUT",
+        headers: {
+          token: localStorage.token,
+          "Content-type": "application/json",
+        },
+        body: JSON.stringify(body),
+      });
+      const parseRes = await response.json();
+      console.log(parseRes);
+    } catch (error) {
+      console.log(error.message);
+    }
+  };
+
+  const eraseProfile = async () => {
+    try {
+      const response = await fetch("http://localhost:5000/auth/eraseuser", {
+        method: "PUT",
+        headers: {
+          token: localStorage.token,
+          "Content-type": "application/json",
+        },
+      });
+      const parseRes = await response.json();
+      localStorage.removeItem("token");
+      router.push("/");
+      toast.success("Account Deactivated Successfully", {
+        position: "top-center",
+        autoClose: 3000,
+        hideProgressBar: true,
+        closeOnClick: true,
+        pauseOnHover: false,
+        draggable: true,
+        progress: undefined,
+      });
+    } catch (error) {
+      console.log(error.message);
+    }
+  };
+
   const getUserInfo = async () => {
     try {
       const response = await fetch("http://localhost:5000/dashboard/userinfo", {
@@ -55,6 +174,47 @@ const dashboard = () => {
       if (parseRes == 0) {
         router.push("/Authentication/Register/info");
       }
+    } catch (error) {
+      console.log(error.message);
+    }
+  };
+
+  // ! user health delete
+  const RemoveHealth = async () => {
+    try {
+      const response = await fetch(
+        "http://localhost:5000/dashboard/userhealth",
+        {
+          method: "delete",
+          headers: {
+            token: localStorage.token,
+          },
+        }
+      );
+      const parseRes = await response.json();
+      console.log(parseRes);
+    } catch (error) {
+      console.log(error.message);
+    }
+  };
+
+  // ! For user information retrive
+  const getUserInformation = async () => {
+    try {
+      const response = await fetch(
+        "http://localhost:5000/dashboard/userinformation",
+        {
+          method: "get",
+          headers: {
+            token: localStorage.token,
+          },
+        }
+      );
+      const parseRes = await response.json();
+      setdob(parseRes.dob.slice(0, 10));
+      setheight(parseRes.height);
+      setweight(parseRes.weight);
+      setusergoal(parseRes.goal);
     } catch (error) {
       console.log(error.message);
     }
@@ -77,7 +237,7 @@ const dashboard = () => {
   };
   useEffect(() => {
     getUserInfo();
-
+    getUserInformation();
     getUser();
   }, []);
   return (
@@ -102,11 +262,13 @@ const dashboard = () => {
             <div className="py-6 md:py-10 px-10">
               <p className="text-lg text-center md:text-left">Name : {name} </p>
               <p className="text-lg text-center md:text-left">
-                Date Of birth : 2001/06/06{" "}
+                Date Of birth : {dob}
               </p>
-              <p className="text-lg text-center md:text-left">Weight : 91kgs</p>
               <p className="text-lg text-center md:text-left">
-                Height : 1.78m{" "}
+                Weight : {weight} kgs
+              </p>
+              <p className="text-lg text-center md:text-left">
+                Height : {height} cm
               </p>
               <p className="hidden md:flex md:text-lg md:text-left">
                 User id :
@@ -127,11 +289,11 @@ const dashboard = () => {
               <Radio.Group
                 name="radiogroup"
                 onChange={onChange}
-                defaultValue={1}
+                defaultValue={goal}
               >
-                <Radio value={1}>Lose Weight</Radio>
-                <Radio value={2}>Get Toned</Radio>
-                <Radio value={3}>Build Muscle</Radio>
+                <Radio value={"Fat Loss"}>Lose Weight</Radio>
+                <Radio value={"Get Fit"}>Get Fit</Radio>
+                <Radio value={"Build Muscle"}>Build Muscle</Radio>
               </Radio.Group>
             </div>
             <div>
@@ -139,6 +301,7 @@ const dashboard = () => {
                 <p className="mt-3 md:pr-4 text-lg">Weight:</p>
                 <div>
                   <Input
+                    id="plana"
                     onKeyPress={(event) => {
                       if (!/[0-9]/.test(event.key)) {
                         event.preventDefault();
@@ -155,6 +318,7 @@ const dashboard = () => {
                 <p className="mt-3 md:px-4 text-lg">Height:</p>
                 <div>
                   <Input
+                    id="planb"
                     onKeyPress={(event) => {
                       if (!/[0-9]/.test(event.key)) {
                         event.preventDefault();
@@ -186,6 +350,23 @@ const dashboard = () => {
                   <p className="text-lg pt-1 text-white">Save Changes</p>
                 </Button>
               </div>
+              <div className=" pt-2 md:pl-3 hover:drop-shadow-xl ">
+                <Button
+                  style={{
+                    backgroundColor: "#607fe8",
+                    borderRadius: "10px",
+                    height: "45px",
+                    width: "230px",
+                    boxShadow: "1px 1px grey",
+                    border: "none",
+                  }}
+                  onClick={RemoveHealth}
+                >
+                  <p className="text-lg pt-1 text-white">
+                    Remove Health Condition
+                  </p>
+                </Button>
+              </div>
               <div className=" pt-2 md:px-3 hover:drop-shadow-xl ">
                 <Button
                   style={{
@@ -204,9 +385,10 @@ const dashboard = () => {
                 </Button>
               </div>
             </div>
-            <div className="flex flex-wrap flex-col">
-              <a className="text-center p-2 cursor-pointer ">Advance edit</a>
-              <a className="text-center  cursor-pointer ">Erase profile</a>
+            <div className="flex flex-wrap pt-3 flex-col">
+              <a className="text-center  cursor-pointer" onClick={eraseProfile}>
+                Erase profile
+              </a>
             </div>
           </div>
         </div>
@@ -228,6 +410,7 @@ const dashboard = () => {
               <p className="mt-3 md:pr-4 text-lg">Weight:</p>
               <div>
                 <Input
+                  id="planc"
                   onKeyPress={(event) => {
                     if (!/[0-9]/.test(event.key)) {
                       event.preventDefault();
@@ -244,6 +427,7 @@ const dashboard = () => {
               <p className="mt-3 md:px-4 text-lg">Height:</p>
               <div>
                 <Input
+                  id="pland"
                   onKeyPress={(event) => {
                     if (!/[0-9]/.test(event.key)) {
                       event.preventDefault();
@@ -258,7 +442,13 @@ const dashboard = () => {
                 />
               </div>
             </div>
-            <p className="mt-3 text-lg">BMI: 19.41</p>
+            <p className="mt-3 text-lg">
+              BMI: {BMI}
+              <Popover content={content} title="BMI Information">
+                <Button type="primary">Tips</Button>
+              </Popover>
+            </p>
+
             <div className="flex flex-wrap justify-evenly">
               <div className=" pt-2 hover:drop-shadow-xl ">
                 <Button
@@ -284,6 +474,7 @@ const dashboard = () => {
                     boxShadow: "1px 1px grey",
                     border: "none",
                   }}
+                  onClick={bmi}
                 >
                   <p className="text-lg pt-1 text-white">Calculate BMI</p>
                 </Button>

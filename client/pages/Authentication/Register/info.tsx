@@ -1,17 +1,19 @@
 import React, { useState } from "react";
 import Header from "@components/AppHeader/Header";
-import Link from "next/Link";
 import { useRouter } from "next/router";
+import { toast } from "react-toastify";
 import { Form, Select, Modal, Input, Button, DatePicker, Radio } from "antd";
 
 const info = () => {
   // ? variables for Module
+  let condition;
   let height = 0;
   let weight = 0;
   let gender = "";
-  let DOB = "";
+  let dob = "";
   let goal = "";
-  const condition = [];
+  const dateFormat = "YYYY-MM-DD";
+  const Arraycondition = [];
 
   const router = useRouter();
   //   ? onchange function for user selecttion gender
@@ -47,8 +49,34 @@ const info = () => {
     setIsModalVisible(true);
   };
 
-  const handleOk = () => {
-    console.log(condition[condition.length - 1]);
+  const userhealth = async () => {
+    try {
+      const body = { condition };
+      const response = await fetch(
+        "http://localhost:5000/dashboard/userhealth",
+        {
+          method: "POST",
+          headers: {
+            token: localStorage.token,
+            "Content-type": "application/json",
+          },
+          body: JSON.stringify(body),
+        }
+      );
+      const parseRes = await response.json();
+      console.log(parseRes);
+      router.push("/Authentication/Register/info");
+    } catch (error) {
+      console.log(error.message);
+    }
+  };
+  const handleOk = async () => {
+    let User_condition = [...Arraycondition[Arraycondition.length - 1]];
+    for (let i = 0; i < User_condition.length; i++) {
+      condition = User_condition[i];
+      userhealth();
+    }
+
     setIsModalVisible(false);
   };
 
@@ -57,11 +85,12 @@ const info = () => {
   };
 
   function handleChange(value) {
-    condition.push(value);
+    Arraycondition.push(value);
   }
   //   ? Date
   function onChangeDate(date, dateString) {
-    DOB = dateString;
+    dob = dateString;
+    console.log(dob);
   }
   // ? Goal
   const onChangeGoal = (e) => {
@@ -73,13 +102,37 @@ const info = () => {
   const UserinputWeight = (e) => {
     weight = e.target.value;
   };
-  const onFinish = () => {
-    console.log(weight);
-    console.log(height);
-    console.log(gender);
-    console.log(DOB);
-    console.log(goal);
+
+  // ? Post Request for User info
+  const onFinish = async () => {
+    try {
+      const body = { gender, dob, weight, height, goal };
+      const response = await fetch("http://localhost:5000/dashboard/userinfo", {
+        method: "POST",
+        headers: {
+          token: localStorage.token,
+          "Content-type": "application/json",
+        },
+        body: JSON.stringify(body),
+      });
+      const parseRes = await response.json();
+      if (parseRes) {
+        toast.success("User Information Collected!", {
+          position: "top-center",
+          autoClose: 3000,
+          hideProgressBar: true,
+          closeOnClick: true,
+          pauseOnHover: false,
+          draggable: true,
+          progress: undefined,
+        });
+        router.push("/dashboard");
+      }
+    } catch (error) {
+      console.log(error.message);
+    }
   };
+
   return (
     <div>
       <Header buttons={false} verifyContent={false} CurrentPage={0} />
@@ -96,6 +149,50 @@ const info = () => {
               initialValues={{ remember: true }}
               onFinish={onFinish}
             >
+              <Form.Item label="Do you have any Health Conditions?">
+                <Button
+                  style={{
+                    marginRight: "20px",
+                    borderRadius: "10px",
+                    width: "60px",
+                  }}
+                  type="primary"
+                  onClick={showModal}
+                >
+                  Yes
+                </Button>
+                <Button
+                  style={{
+                    borderRadius: "10px",
+                    width: "60px",
+                  }}
+                >
+                  No
+                </Button>
+                <Modal
+                  bodyStyle={{ height: "400px" }}
+                  title="Select Health Condition"
+                  width={600}
+                  visible={isModalVisible}
+                  onOk={handleOk}
+                  onCancel={handleCancel}
+                >
+                  <p className="text-sky-600">
+                    If your health condition is not listed below please consult
+                    your tainer or doctor!
+                  </p>
+                  <Select
+                    mode="multiple"
+                    allowClear
+                    style={{ width: "100%" }}
+                    placeholder="Please select"
+                    onChange={handleChange}
+                  >
+                    {children}
+                  </Select>
+                </Modal>
+              </Form.Item>
+
               <Form.Item
                 label="Gender"
                 name="gender"
@@ -104,18 +201,19 @@ const info = () => {
                 ]}
               >
                 <Radio.Group onChange={onChange}>
-                  <Radio value={"male"}>Male</Radio>
-                  <Radio value={"female"}>Female</Radio>
+                  <Radio value={"Male"}>Male</Radio>
+                  <Radio value={"Female"}>Female</Radio>
                 </Radio.Group>
               </Form.Item>
               <Form.Item
                 label="Date of birth"
-                name="DOB"
+                name="dob"
                 rules={[{ required: true, message: "Date of Birth!" }]}
               >
                 <DatePicker
                   size="large"
                   style={{ width: "100%", borderRadius: "15px" }}
+                  format={dateFormat}
                   onChange={onChangeDate}
                 />
               </Form.Item>
@@ -175,53 +273,9 @@ const info = () => {
                   defaultValue={1}
                 >
                   <Radio value={"Fat Loss"}>Lose Weight</Radio>
-                  <Radio value={"Get Fit"}>Get Toned</Radio>
+                  <Radio value={"Get Fit"}>Get Fit</Radio>
                   <Radio value={"Build Muscle"}>Build Muscle</Radio>
                 </Radio.Group>
-              </Form.Item>
-
-              <Form.Item label="Do you have any Health Conditions?">
-                <Button
-                  style={{
-                    marginRight: "20px",
-                    borderRadius: "10px",
-                    width: "60px",
-                  }}
-                  type="primary"
-                  onClick={showModal}
-                >
-                  Yes
-                </Button>
-                <Button
-                  style={{
-                    borderRadius: "10px",
-                    width: "60px",
-                  }}
-                >
-                  No
-                </Button>
-                <Modal
-                  bodyStyle={{ height: "400px" }}
-                  title="Select Health Condition"
-                  width={600}
-                  visible={isModalVisible}
-                  onOk={handleOk}
-                  onCancel={handleCancel}
-                >
-                  <p className="text-sky-600">
-                    If your health condition is not listed below please consult
-                    your tainer or doctor!
-                  </p>
-                  <Select
-                    mode="multiple"
-                    allowClear
-                    style={{ width: "100%" }}
-                    placeholder="Please select"
-                    onChange={handleChange}
-                  >
-                    {children}
-                  </Select>
-                </Modal>
               </Form.Item>
 
               <Form.Item>

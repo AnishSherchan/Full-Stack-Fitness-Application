@@ -29,3 +29,15 @@ CREATE TABLE user_info(
     claves_size integer,
     bmi NUMERIC(5,2)
 );
+-- ? Table Health Condition
+CREATE Table health_condition(
+    condition_id SERIAL PRIMARY KEY,
+    condition_name VARCHAR(255) NOT NULL
+);
+-- ? Create Table User_health
+CREATE Table user_health(
+    condition_id integer ,
+    FOREIGN KEY(condition_id) REFERENCES health_condition(condition_id),
+    user_id uuid,
+    FOREIGN KEY(user_id) REFERENCES users(user_id)
+);

@@ -66,6 +66,11 @@ router.post("/login", validInfo, async (req, res) => {
     }
     //? If all test are passed we provide user a token
     const token = jwtGenerator(user.rows[0].user_id);
+    // We can user account status activated
+    const eraseuser = await pool.query(
+      "UPDATE users SET account_status = 'Active' WHERE user_email = ($1) RETURNING * ",
+      [email]
+    );
     res.json({ token });
   } catch (err) {
     // ? handeling error
@@ -73,6 +78,22 @@ router.post("/login", validInfo, async (req, res) => {
     res.status(5000).json("Server Error");
   }
 });
+
+// ! APIs for erase profile
+// ?
+router.put("/eraseuser", authorization, async (req, res) => {
+  try {
+    const user_id = req.user;
+    const eraseuser = await pool.query(
+      "UPDATE users SET account_status = 'Deactivated' WHERE user_id = ($1) RETURNING * ",
+      [user_id]
+    );
+    res.json(eraseuser.rows[0]);
+  } catch (err) {
+    console.log(err.message);
+  }
+});
+
 // ? For checking user verfication
 router.get("/is-verify", authorization, async (req, res) => {
   try {

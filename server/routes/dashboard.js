@@ -1,6 +1,7 @@
 const router = require("express").Router();
 const pool = require("../db");
 const authorization = require("../middleware/authorization");
+// ? API for user ID
 router.get("/", authorization, async (req, res) => {
   try {
     const user = await pool.query("SELECT * FROM users WHERE user_id = $1", [
@@ -13,6 +14,9 @@ router.get("/", authorization, async (req, res) => {
   }
 });
 
+// ! Apis for user Informations
+// Todo Comeplete Put REquest for User Information
+// ? API for  user_inforamtion Check
 router.get("/userinfo", authorization, async (req, res) => {
   try {
     const userinfo = await pool.query(
@@ -26,6 +30,7 @@ router.get("/userinfo", authorization, async (req, res) => {
   }
 });
 
+// ? APi for user Information Insertion
 router.post("/userinfo", authorization, async (req, res) => {
   try {
     //? destructure req.body
@@ -42,4 +47,90 @@ router.post("/userinfo", authorization, async (req, res) => {
     res.status(5000).json("Server Error");
   }
 });
+// ? API for  user_inforamtion
+router.get("/userinformation", authorization, async (req, res) => {
+  try {
+    const userinfo = await pool.query(
+      "SELECT * FROM user_info WHERE user_id = $1",
+      [req.user]
+    );
+    res.json(userinfo.rows[0]);
+  } catch (error) {
+    console.error(error.message);
+    res.status(500).json("Server error");
+  }
+});
+
+// ? user goal update
+router.put("/usergoal", authorization, async (req, res) => {
+  try {
+    const { selectedgoal } = req.body;
+    const user_id = req.user;
+    const usergoalupdate = await pool.query(
+      "UPDATE user_info SET goal = ($1) WHERE user_id = ($2) RETURNING * ",
+      [selectedgoal, user_id]
+    );
+    res.json(usergoalupdate.rows[0]);
+  } catch (err) {
+    console.log(err.message);
+  }
+});
+
+// ? user wEIGHT AND HEIGHT update
+router.put("/userheightweight", authorization, async (req, res) => {
+  try {
+    const { selectedHeight, selectedWeight } = req.body;
+    const user_id = req.user;
+    const userweiheiupdate = await pool.query(
+      "UPDATE user_info SET height = ($1), weight = ($2) WHERE user_id = ($3) RETURNING * ",
+      [selectedHeight, selectedWeight, user_id]
+    );
+    res.json(userweiheiupdate.rows[0]);
+  } catch (err) {
+    console.log(err.message);
+  }
+});
+
+// ! Api for user Health Information
+// ? Api for user_health condition insertion
+router.post("/userhealth", authorization, async (req, res) => {
+  try {
+    //? destructure req.body
+    const { condition } = req.body;
+    const user_id = req.user;
+    //?  insert user data
+    let newUserHealth = await pool.query(
+      "INSERT INTO user_health (condition_id, user_id ) VALUES ($1, $2) RETURNING *",
+      [condition, user_id]
+    );
+    res.json(newUserHealth.rows[0]);
+  } catch (error) {
+    console.log(error.message);
+    res.status(5000).json("Server Error");
+  }
+});
+
+// ? Api for user_health condition Delete
+router.delete("/userhealth", authorization, async (req, res) => {
+  try {
+    //? destructure req.body
+    const user_id = req.user;
+
+    const userhealth = await pool.query(
+      "SELECT * FROM user_health WHERE user_id = ($1)",
+      [user_id]
+    );
+    if (userhealth.rowCount > 0) {
+      const DelHealth = await pool.query(
+        "DELETE FROM user_health WHERE user_id = ($1)",
+        [user_id]
+      );
+    }
+    res.json("Deleted");
+  } catch (error) {
+    console.log(error.message);
+    res.status(5000).json("Server Error");
+  }
+});
+
 module.exports = router;
