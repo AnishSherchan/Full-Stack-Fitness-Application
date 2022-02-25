@@ -4,7 +4,16 @@
 import React, { useState, useEffect } from "react";
 import { useRouter } from "next/router";
 import Nav from "../src/components/AppHeader/Header.tsx";
-import { Button, Typography, Popover, Divider, Radio, Input } from "antd";
+import {
+  Button,
+  Modal,
+  Select,
+  Typography,
+  Popover,
+  Divider,
+  Radio,
+  Input,
+} from "antd";
 import Image from "next/image";
 import { toast } from "react-toastify";
 import Verify from "./HOC/Verify";
@@ -19,9 +28,112 @@ const dashboard = () => {
   const [height, setheight] = useState("");
   const [weight, setweight] = useState("");
   const [BMI, setBMI] = useState("");
+  const Arraycondition = [];
+  let condition;
   // ?Weight and height detail for users edit
   let h1 = 0;
   let w1 = 0;
+
+  // ? Modal
+
+  const { Option } = Select;
+  const children = [];
+  const disease = [
+    "Hearth diseas",
+    "Cancer",
+    "Dementia",
+    "Stroke",
+    "High Blood pressure",
+    "Diabetes type 2",
+    "Diabetes",
+    "Back pain",
+    "Arthritis",
+    "COPD",
+    "Osteoporosis",
+    "Chronic Pain",
+    "Cholesterol",
+  ];
+  for (let i = 0; i < disease.length; i++) {
+    children.push(<Option key={i + 1}>{disease[i]}</Option>);
+  }
+
+  const [isModalVisible, setIsModalVisible] = useState(false);
+
+  const [ModalVisible, setModalVisible] = useState(false);
+
+  const showModal = () => {
+    setIsModalVisible(true);
+  };
+
+  const showMeasureModal = () => {
+    setModalVisible(true);
+  };
+
+  const userhealth = async () => {
+    try {
+      const body = { condition };
+      const response = await fetch(
+        "http://localhost:5000/dashboard/userhealth",
+        {
+          method: "POST",
+          headers: {
+            token: localStorage.token,
+            "Content-type": "application/json",
+          },
+          body: JSON.stringify(body),
+        }
+      );
+      const parseRes = await response.json();
+    } catch (error) {
+      console.log(error.message);
+    }
+  };
+
+  const eraseuserhealth = async () => {
+    try {
+      const response = await fetch(
+        "http://localhost:5000/dashboard/userhealth",
+        {
+          method: "DELETE",
+          headers: {
+            token: localStorage.token,
+            "Content-type": "application/json",
+          },
+        }
+      );
+      const parseRes = await response.json();
+    } catch (error) {
+      console.log(error.message);
+    }
+  };
+
+  const handleOk = async () => {
+    if (Arraycondition.length != 0) {
+      eraseuserhealth();
+      let User_condition = [...Arraycondition[Arraycondition.length - 1]];
+      for (let i = 0; i < User_condition.length; i++) {
+        condition = User_condition[i];
+        userhealth();
+      }
+    }
+    setIsModalVisible(false);
+  };
+
+  const handleMeasureOk = async () => {
+    setModalVisible(false);
+  };
+
+  const handleCancel = () => {
+    setIsModalVisible(false);
+  };
+
+  const handleMeasureCancel = () => {
+    setModalVisible(false);
+  };
+
+  function handleChange(value) {
+    Arraycondition.push(value);
+  }
 
   // ? popover content
   const content = (
@@ -367,6 +479,31 @@ const dashboard = () => {
                   </p>
                 </Button>
               </div>
+              <Modal
+                bodyStyle={{ height: "400px" }}
+                title="Select Health Condition"
+                width={600}
+                visible={isModalVisible}
+                onOk={handleOk}
+                onCancel={handleCancel}
+              >
+                <p className="text-pink-900 text-xl">
+                  Please reselect all your health Conditions!
+                </p>
+                <p className="text-sky-600">
+                  If your health condition is not listed below please consult
+                  your tainer or doctor!
+                </p>
+                <Select
+                  mode="multiple"
+                  allowClear
+                  style={{ width: "100%" }}
+                  placeholder="Please select"
+                  onChange={handleChange}
+                >
+                  {children}
+                </Select>
+              </Modal>
               <div className=" pt-2 md:px-3 hover:drop-shadow-xl ">
                 <Button
                   style={{
@@ -377,7 +514,7 @@ const dashboard = () => {
                     boxShadow: "1px 1px grey",
                     border: "none",
                   }}
-                  onClick={InputValue}
+                  onClick={showModal}
                 >
                   <p className="text-lg pt-1 text-white">
                     Edit your Health Condition
@@ -448,7 +585,18 @@ const dashboard = () => {
                 <Button type="primary">Tips</Button>
               </Popover>
             </p>
-
+            <Modal
+              bodyStyle={{ height: "600px" }}
+              title="Body Measurements"
+              width={1000}
+              visible={ModalVisible}
+              onOk={handleMeasureOk}
+              onCancel={handleMeasureCancel}
+            >
+              <p className="text-pink-900 text-lg">
+                Please measure all muscles given below!
+              </p>
+            </Modal>
             <div className="flex flex-wrap justify-evenly">
               <div className=" pt-2 hover:drop-shadow-xl ">
                 <Button
@@ -460,6 +608,7 @@ const dashboard = () => {
                     boxShadow: "1px 1px grey",
                     border: "none",
                   }}
+                  onClick={showMeasureModal}
                 >
                   <p className="text-lg pt-1 text-white">Measurement</p>
                 </Button>

@@ -41,3 +41,16 @@ CREATE Table user_health(
     user_id uuid,
     FOREIGN KEY(user_id) REFERENCES users(user_id)
 );
+-- ? Table Supplement
+CREATE Table supplement(
+    supplement_id SERIAL PRIMARY KEY,
+    supplement_name VARCHAR(255) NOT NULL,
+    company VARCHAR(255) NOT NULL,
+    description VARCHAR(255) NOT NULL,
+    tips VARCHAR(255) NOT NULL,
+    energy VARCHAR(255) NOT NULL,
+    protein VARCHAR(255) NOT NULL,
+    carbs VARCHAR(255) NOT NULL,
+    fat VARCHAR(255) NOT NULL,
+    image_url VARCHAR(255) NOT NULL
+);

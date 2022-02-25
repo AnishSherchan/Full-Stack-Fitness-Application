@@ -133,4 +133,15 @@ router.delete("/userhealth", authorization, async (req, res) => {
   }
 });
 
+// ! Supplement Information
+router.get("/supplements", async (req, res) => {
+  try {
+    const supplements = await pool.query("SELECT * FROM supplement;");
+    res.json(supplements.rows);
+  } catch (error) {
+    console.error(error.message);
+    res.status(500).json("Server error");
+  }
+});
+
 module.exports = router;
