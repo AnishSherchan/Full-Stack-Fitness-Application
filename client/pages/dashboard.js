@@ -3,6 +3,8 @@
 // Todo Create BMI calculate Function
 import React, { useState, useEffect } from "react";
 import { useRouter } from "next/router";
+import Link from "next/link";
+import Chartsdata from "../src/components/Charts";
 import Nav from "../src/components/AppHeader/Header.tsx";
 import {
   Button,
@@ -12,11 +14,13 @@ import {
   Popover,
   Divider,
   Radio,
+  Form,
   Input,
 } from "antd";
 import Image from "next/image";
 import { toast } from "react-toastify";
 import Verify from "./HOC/Verify";
+
 const dashboard = () => {
   const router = useRouter();
   const { Paragraph } = Typography;
@@ -28,12 +32,19 @@ const dashboard = () => {
   const [height, setheight] = useState("");
   const [weight, setweight] = useState("");
   const [BMI, setBMI] = useState("");
+  const [adminrole, setrole] = useState(false);
   const Arraycondition = [];
   let condition;
   // ?Weight and height detail for users edit
   let h1 = 0;
   let w1 = 0;
-
+  let neck = 0;
+  let shoulder = 0;
+  let forearm = 0;
+  let biceps = 0;
+  let hip = 0;
+  let thigh = 0;
+  let claves = 0;
   // ? Modal
 
   const { Option } = Select;
@@ -89,6 +100,31 @@ const dashboard = () => {
     }
   };
 
+  const onFinish = async () => {
+    try {
+      const body = { neck, shoulder, forearm, biceps, hip, thigh, claves };
+      const response = await fetch(
+        "http://localhost:5000/dashboard/userbodymetric",
+        {
+          method: "PUT",
+          headers: {
+            token: localStorage.token,
+            "Content-type": "application/json",
+          },
+          body: JSON.stringify(body),
+        }
+      );
+      const parseRes = await response.json();
+      console.log(parseRes);
+      onReset();
+    } catch (error) {
+      console.log(error.message);
+    }
+  };
+  const [form] = Form.useForm();
+  const onReset = () => {
+    form.resetFields();
+  };
   const eraseuserhealth = async () => {
     try {
       const response = await fetch(
@@ -157,6 +193,28 @@ const dashboard = () => {
   const UserinputWeight = (e) => {
     w1 = e.target.value;
   };
+  const userinputneck = (e) => {
+    neck = e.target.value;
+  };
+  const userinputshoulder = (e) => {
+    shoulder = e.target.value;
+  };
+  const userinputforearm = (e) => {
+    forearm = e.target.value;
+  };
+  const userinputbiceps = (e) => {
+    biceps = e.target.value;
+  };
+  const userinputhip = (e) => {
+    hip = e.target.value;
+  };
+  const userinputthigh = (e) => {
+    thigh = e.target.value;
+  };
+  const userinputclaves = (e) => {
+    claves = e.target.value;
+  };
+
   // ? Submit event for editing Weight Height of Edit and BMI
 
   // ? Ipnut value for Edit profile
@@ -343,10 +401,14 @@ const dashboard = () => {
       const parseRes = await response.json();
       setname(parseRes.user_name);
       setuserid(parseRes.user_id);
+      if (parseRes.user_role == "admin") {
+        setrole(true);
+      }
     } catch (error) {
       console.log(error.message);
     }
   };
+
   useEffect(() => {
     getUserInfo();
     getUserInformation();
@@ -355,6 +417,13 @@ const dashboard = () => {
   return (
     <div>
       <Nav buttons={false} verifyContent={true} CurrentPage={1} />
+      {adminrole == true && (
+        <div className="fixed bg-primaryButton p-1 px-4 rounded-xl z-10 bottom-0 right-0 m-3">
+          <Link href="/admin">
+            <a className="text-white">Admin pannel</a>
+          </Link>
+        </div>
+      )}
       <h1 className="text-2xl mt-5 px-10 heading ">Hello {name} 👋</h1>
       {
         // ? First Tag
@@ -537,8 +606,8 @@ const dashboard = () => {
         <h1 className="text-2xl md:pt-6 md:text-white px-10 text-center ">
           Body Metric
         </h1>
-        <div className="hidden md:flex md:flex-col md:items-center">
-          <Image width={569} height={472} src="/icons/graph.svg" />
+        <div className="md:flex md:flex-col md:items-center">
+          <Chartsdata />
         </div>
         <div className="md:flex md:flex-col md:items-center">
           <div className=" h-fitcontent md:w-8/12 px-9 md:pb-6 md:bg-navcolor rounded-3xl drop-shadow-2xl md:mt-11">
@@ -586,7 +655,7 @@ const dashboard = () => {
               </Popover>
             </p>
             <Modal
-              bodyStyle={{ height: "600px" }}
+              bodyStyle={{ height: "800px" }}
               title="Body Measurements"
               width={1000}
               visible={ModalVisible}
@@ -594,8 +663,212 @@ const dashboard = () => {
               onCancel={handleMeasureCancel}
             >
               <p className="text-pink-900 text-lg">
-                Please measure all muscles given below!
+                Please measure all muscles given below! Measure in inch
               </p>
+              <Form
+                name="normal_login"
+                className="login-form"
+                layout="vertical"
+                form={form}
+                initialValues={{ remember: true }}
+                onFinish={onFinish}
+              >
+                <Form.Item
+                  label="Neck size in inch."
+                  name="Neck"
+                  rules={[
+                    { required: true, message: "Please enter your Neck Size!" },
+                  ]}
+                >
+                  <Input
+                    id="FormValues"
+                    onKeyPress={(event) => {
+                      if (!/[0-9-.]/.test(event.key)) {
+                        event.preventDefault();
+                      }
+                    }}
+                    onChange={(e) => userinputneck(e)}
+                    size="middle "
+                    style={{
+                      borderRadius: "10px",
+                      fontSize: "17px",
+                    }}
+                    placeholder="Weight/KGS"
+                  />
+                </Form.Item>
+
+                <Form.Item
+                  label="Shoulder size in inch."
+                  name="shoulder"
+                  rules={[
+                    {
+                      required: true,
+                      message: "Please enter your Shoulder size!",
+                    },
+                  ]}
+                >
+                  <Input
+                    id="FormValues"
+                    onKeyPress={(event) => {
+                      if (!/[0-9-.]/.test(event.key)) {
+                        event.preventDefault();
+                      }
+                    }}
+                    onChange={(e) => userinputshoulder(e)}
+                    size="middle "
+                    style={{
+                      borderRadius: "10px",
+                      fontSize: "17px",
+                    }}
+                    placeholder="Height/m"
+                  />
+                </Form.Item>
+                <Form.Item
+                  label="forearm size in inch."
+                  name="forearm"
+                  rules={[
+                    {
+                      required: true,
+                      message: "Please enter your forearm size!",
+                    },
+                  ]}
+                >
+                  <Input
+                    id="FormValues"
+                    onKeyPress={(event) => {
+                      if (!/[0-9-.]/.test(event.key)) {
+                        event.preventDefault();
+                      }
+                    }}
+                    onChange={(e) => userinputforearm(e)}
+                    size="middle "
+                    style={{
+                      borderRadius: "10px",
+                      fontSize: "17px",
+                    }}
+                    placeholder="Height/m"
+                  />
+                </Form.Item>
+                <Form.Item
+                  label="Biceps size in inch."
+                  name="biceps"
+                  rules={[
+                    {
+                      required: true,
+                      message: "Please enter your biceps size!",
+                    },
+                  ]}
+                >
+                  <Input
+                    id="FormValues"
+                    onKeyPress={(event) => {
+                      if (!/[0-9-.]/.test(event.key)) {
+                        event.preventDefault();
+                      }
+                    }}
+                    onChange={(e) => userinputbiceps(e)}
+                    size="middle "
+                    style={{
+                      borderRadius: "10px",
+                      fontSize: "17px",
+                    }}
+                    placeholder="Height/m"
+                  />
+                </Form.Item>
+                <Form.Item
+                  label="Hip size in inch."
+                  name="hip"
+                  rules={[
+                    { required: true, message: "Please enter your hip size!" },
+                  ]}
+                >
+                  <Input
+                    id="FormValues"
+                    onKeyPress={(event) => {
+                      if (!/[0-9-.]/.test(event.key)) {
+                        event.preventDefault();
+                      }
+                    }}
+                    onChange={(e) => userinputhip(e)}
+                    size="middle "
+                    style={{
+                      borderRadius: "10px",
+                      fontSize: "17px",
+                    }}
+                    placeholder="Height/m"
+                  />
+                </Form.Item>
+                <Form.Item
+                  label="Thigh size in inch."
+                  name="thigh"
+                  rules={[
+                    {
+                      required: true,
+                      message: "Please enter your thigh size!",
+                    },
+                  ]}
+                >
+                  <Input
+                    id="FormValues"
+                    onKeyPress={(event) => {
+                      if (!/[0-9-.-.]/.test(event.key)) {
+                        event.preventDefault();
+                      }
+                    }}
+                    onChange={(e) => userinputthigh(e)}
+                    size="middle "
+                    style={{
+                      borderRadius: "10px",
+                      fontSize: "17px",
+                    }}
+                    placeholder="Height/m"
+                  />
+                </Form.Item>
+                <Form.Item
+                  label="Claves size in inch."
+                  name="claves"
+                  rules={[
+                    {
+                      required: true,
+                      message: "Please enter your Claves size!",
+                    },
+                  ]}
+                >
+                  <Input
+                    id="FormValues"
+                    onKeyPress={(event) => {
+                      if (!/[0-9-.]/.test(event.key)) {
+                        event.preventDefault();
+                      }
+                    }}
+                    onChange={(e) => userinputclaves(e)}
+                    size="middle "
+                    style={{
+                      borderRadius: "10px",
+                      fontSize: "17px",
+                    }}
+                    placeholder="Height/m"
+                  />
+                </Form.Item>
+
+                <Form.Item>
+                  <Button
+                    size="large"
+                    type="primary"
+                    htmlType="submit"
+                    className="login"
+                    style={{
+                      borderRadius: "15px",
+                      fontSize: "18px,",
+                      fontWeight: "bold",
+                      boxShadow: "3px 3px rgba(0, 0, 0, 0.15)",
+                    }}
+                    block
+                  >
+                    Save Progress
+                  </Button>
+                </Form.Item>
+              </Form>
             </Modal>
             <div className="flex flex-wrap justify-evenly">
               <div className=" pt-2 hover:drop-shadow-xl ">

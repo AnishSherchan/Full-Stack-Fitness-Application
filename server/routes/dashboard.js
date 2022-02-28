@@ -91,6 +91,34 @@ router.put("/userheightweight", authorization, async (req, res) => {
   }
 });
 
+// ? user Body metric insert
+router.put("/userbodymetric", authorization, async (req, res) => {
+  try {
+    const { neck, shoulder, forearm, biceps, hip, thigh, claves } = req.body;
+    const user_id = req.user;
+    const userMetric = await pool.query(
+      "UPDATE user_info SET neck_size = ($1), shoulder_size = ($2), forearm_size = ($3), biceps_size = ($4), hip_size = ($5), thigh_size = ($6), claves_size = ($7) WHERE user_id = ($8) RETURNING * ",
+      [neck, shoulder, forearm, biceps, hip, thigh, claves, user_id]
+    );
+    res.json(userMetric.rows[0]);
+  } catch (err) {
+    console.log(err.message);
+  }
+});
+
+router.get("/userbodymetric", authorization, async (req, res) => {
+  try {
+    const userinfo = await pool.query(
+      "SELECT neck_size, shoulder_size, forearm_size, biceps_size, hip_size, thigh_size, claves_size FROM user_info WHERE user_id = ($1)",
+      [req.user]
+    );
+    res.json(userinfo.rows[0]);
+  } catch (error) {
+    console.error(error.message);
+    res.status(500).json("Server error");
+  }
+});
+
 // ! Api for user Health Information
 // ? Api for user_health condition insertion
 router.post("/userhealth", authorization, async (req, res) => {
@@ -138,6 +166,16 @@ router.get("/supplements", async (req, res) => {
   try {
     const supplements = await pool.query("SELECT * FROM supplement;");
     res.json(supplements.rows);
+  } catch (error) {
+    console.error(error.message);
+    res.status(500).json("Server error");
+  }
+});
+// ! exercise Information
+router.get("/exercises", async (req, res) => {
+  try {
+    const exercises = await pool.query("SELECT * FROM exercises;");
+    res.json(exercises.rows);
   } catch (error) {
     console.error(error.message);
     res.status(500).json("Server error");

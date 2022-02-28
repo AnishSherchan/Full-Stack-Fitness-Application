@@ -20,14 +20,13 @@ CREATE TABLE user_info(
     weight integer NOT NULL,
     height integer NOT NULL,
     goal VARCHAR(255) NOT NULL,
-    neck_size integer,
-    shoulder_size integer,
-    forearm_size integer,
-    biceps_size integer,
-    hip_size integer,
-    thigh_size integer,
-    claves_size integer,
-    bmi NUMERIC(5,2)
+    neck_size decimal,
+    shoulder_size decimal,
+    forearm_size decimal,
+    biceps_size decimal,
+    hip_size decimal,
+    thigh_size decimal,
+    claves_size decimal
 );
 -- ? Table Health Condition
 CREATE Table health_condition(

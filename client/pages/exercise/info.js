@@ -50,7 +50,7 @@ const info = () => {
           </div>
         </div>
       </div>
-      <div className="fixed bg-primaryButton p-1 px-4 rounded-xl bottom-0 right-0 m-3">
+      <div className="fixed bg-primaryButton p-1 z-10 px-4 rounded-xl bottom-0 right-0 m-3">
         <Link href="/exercise">
           <a className="text-white">Go Back</a>
         </Link>

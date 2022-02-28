@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Header from "@components/AppHeader/Header";
 import { useRouter } from "next/router";
 import { toast } from "react-toastify";
@@ -71,10 +71,12 @@ const info = () => {
     }
   };
   const handleOk = async () => {
-    let User_condition = [...Arraycondition[Arraycondition.length - 1]];
-    for (let i = 0; i < User_condition.length; i++) {
-      condition = User_condition[i];
-      userhealth();
+    if (Arraycondition.length != 0) {
+      let User_condition = [...Arraycondition[Arraycondition.length - 1]];
+      for (let i = 0; i < User_condition.length; i++) {
+        condition = User_condition[i];
+        userhealth();
+      }
     }
 
     setIsModalVisible(false);
@@ -132,6 +134,29 @@ const info = () => {
       console.log(error.message);
     }
   };
+  const getUserInfo = async () => {
+    try {
+      const response = await fetch("http://localhost:5000/dashboard/userinfo", {
+        method: "get",
+        headers: {
+          token: localStorage.token,
+        },
+      });
+      const parseRes = await response.json();
+      if (parseRes == "Not Authorize") {
+        router.push("/");
+      }
+      if (parseRes == 1) {
+        router.push("/dashboard");
+      }
+    } catch (error) {
+      console.log(error.message);
+    }
+  };
+
+  useEffect(() => {
+    getUserInfo();
+  }, []);
 
   return (
     <div>

@@ -27,8 +27,6 @@ const supplements = () => {
   const filteredsupplement = supplements.filter((supplement) =>
     supplement.supplement_name.toLowerCase().includes(search.toLowerCase())
   );
-  console.log(filteredsupplement);
-  console.log("i re launched");
   useEffect(() => {
     supplementsInfo();
   }, []);
