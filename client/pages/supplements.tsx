@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { Input, Button } from "antd";
+import Link from "next/link";
 import Verify from "./HOC/Verify";
 import SupInfo from "../src/components/SupplementsInfo";
 import Nav from "../src/components/AppHeader/Header";
@@ -57,12 +58,19 @@ const supplements = () => {
         <div className="flex flex-wrap justify-evenly">
           {filteredsupplement.map((supplement) => {
             return (
-              <SupInfo
-                key={supplement.supplement_id}
-                id={supplement.supplement_id}
-                url={supplement.image_url}
-                title={supplement.supplement_name}
-              />
+              <Link
+                href="/supplements/[id]"
+                as={`/supplements/${supplement.supplement_id}`}
+              >
+                <a>
+                  <SupInfo
+                    key={supplement.supplement_id}
+                    id={supplement.supplement_id}
+                    url={supplement.image_url}
+                    title={supplement.supplement_name}
+                  />
+                </a>
+              </Link>
             );
           })}
         </div>

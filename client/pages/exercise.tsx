@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { Input, Button } from "antd";
+import Image from "next/image";
 import Information from "../src/components/ExerciseInfo";
 import Nav from "../src/components/AppHeader/Header";
 import Verify from "./HOC/Verify";
@@ -34,6 +35,15 @@ const exercise = () => {
   return (
     <div>
       <Nav buttons={false} verifyContent={true} CurrentPage={3} />
+      <div>
+        <Image
+          className=""
+          src="/icons/exercise.svg"
+          alt="Protien"
+          width={1530}
+          height={550}
+        />
+      </div>
       <div className="p-8">
         <div className=" md:flex md:flex-col md:pb-5 md:items-center">
           <div className="md:w-4/12">

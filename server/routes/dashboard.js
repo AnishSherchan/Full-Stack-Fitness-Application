@@ -171,6 +171,23 @@ router.get("/supplements", async (req, res) => {
     res.status(500).json("Server error");
   }
 });
+
+// ? Supplement Informartion of specific id
+router.post("/supplement", async (req, res) => {
+  try {
+    const { id } = req.body;
+    //?  insert user data
+    const supplements = await pool.query(
+      "SELECT * FROM supplement WHERE supplement_id = ($1);",
+      [id]
+    );
+    res.json(supplements.rows[0]);
+  } catch (error) {
+    console.error(error.message);
+    res.status(500).json("Server error");
+  }
+});
+
 // ! exercise Information
 router.get("/exercises", async (req, res) => {
   try {

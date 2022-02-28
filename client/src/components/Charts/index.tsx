@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect } from "react";
 import {
   Chart as ChartJS,
   CategoryScale,
@@ -36,28 +36,31 @@ export const options = {
     },
   },
 };
+
 let usersmetric = [];
-const getUsermetric = async () => {
-  try {
-    const response = await fetch(
-      "http://localhost:5000/dashboard/userbodymetric",
-      {
-        method: "get",
-        headers: {
-          token: localStorage.token,
-        },
-      }
-    );
-    const parseRes = await response.json();
-    for (var i in parseRes) {
-      usersmetric.push(parseRes[i]);
-    }
-  } catch (error) {
-    console.log(error.message);
-  }
-};
 const index = () => {
-  getUsermetric();
+  const getUsermetric = async () => {
+    try {
+      const response = await fetch(
+        "http://localhost:5000/dashboard/userbodymetric",
+        {
+          method: "get",
+          headers: {
+            token: localStorage.token,
+          },
+        }
+      );
+      const parseRes = await response.json();
+      for (var i in parseRes) {
+        usersmetric.push(parseRes[i]);
+      }
+    } catch (error) {
+      console.log(error.message);
+    }
+  };
+  useEffect(() => {
+    getUsermetric();
+  }, []);
   const labels = [
     "Neck size",
     "Shoulder size",

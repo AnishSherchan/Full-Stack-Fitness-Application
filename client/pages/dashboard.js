@@ -381,6 +381,7 @@ const dashboard = () => {
         }
       );
       const parseRes = await response.json();
+      console.log(parseRes);
       setdob(parseRes.dob.slice(0, 10));
       setheight(parseRes.height);
       setweight(parseRes.weight);
