@@ -53,3 +53,16 @@ CREATE Table supplement(
     fat VARCHAR(255) NOT NULL,
     image_url VARCHAR(255) NOT NULL
 );
+-- ? Plan Table
+CREATE Table plan(
+    plan_id SERIAL PRIMARY KEY,
+    plan_name VARCHAR(255) NOT NULL,
+    plan_duration VARCHAR(255) NOT NULL,
+    plan_type VARCHAR(255) NOT NULL,
+    health_condition VARCHAR(255) NOT NULL,
+    working_days VARCHAR(255) NOT NULL,
+    permium VARCHAR(255) NOT NULL,
+    url VARCHAR(255) NOT NULL,
+    genders VARCHAR(255) NOT NULL,
+    age_group VARCHAR(255) NOT NULL
+);

@@ -109,7 +109,7 @@ router.get("/admin", authorization, async (req, res) => {
     const user = await pool.query("SELECT * FROM users WHERE user_id = $1", [
       req.user,
     ]);
-    res.json(user.rows[0].isadmin);
+    res.json(user.rows[0].user_role);
   } catch (error) {
     console.error(error.message);
     res.status(500).json("Server error");

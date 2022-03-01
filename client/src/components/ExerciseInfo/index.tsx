@@ -15,23 +15,22 @@ const index: React.FC<Props> = ({ muscle, type, title, id }) => {
         <p className="text-white md:text-lg ">{title}</p>
         <p className="text-white md:text-lg">Target Area: {muscle}</p>
         <p className="hidden md:block text-white md:text-lg">Type: {type}</p>
-        <Link href="/exercise/info">
-          <Button
-            size="middle"
-            style={{
-              backgroundColor: "#607fe8",
-              borderRadius: "10px",
-              boxShadow: "1px 1px grey",
-              color: "white",
-              border: "none",
-            }}
-            onClick={() => {
-              console.log(id);
-            }}
-          >
-            Learn more
-          </Button>
-        </Link>
+
+        <Button
+          size="middle"
+          style={{
+            backgroundColor: "#607fe8",
+            borderRadius: "10px",
+            boxShadow: "1px 1px grey",
+            color: "white",
+            border: "none",
+          }}
+          onClick={() => {
+            console.log(id);
+          }}
+        >
+          Learn more
+        </Button>
       </div>
     </div>
   );

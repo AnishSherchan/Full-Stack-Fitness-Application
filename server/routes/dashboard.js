@@ -198,5 +198,20 @@ router.get("/exercises", async (req, res) => {
     res.status(500).json("Server error");
   }
 });
+// ? exercise Informartion of specific id
+router.post("/exercise", async (req, res) => {
+  try {
+    const { id } = req.body;
+    //?  insert user data
+    const exercise = await pool.query(
+      "SELECT * FROM exercises WHERE ex_id = ($1);",
+      [id]
+    );
+    res.json(exercise.rows[0]);
+  } catch (error) {
+    console.error(error.message);
+    res.status(500).json("Server error");
+  }
+});
 
 module.exports = router;

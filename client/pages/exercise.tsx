@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
-import { Input, Button } from "antd";
+import { Input } from "antd";
 import Image from "next/image";
+import Link from "next/link";
 import Information from "../src/components/ExerciseInfo";
 import Nav from "../src/components/AppHeader/Header";
 import Verify from "./HOC/Verify";
@@ -63,13 +64,17 @@ const exercise = () => {
         }
         {filteredexercise.map((supplement) => {
           return (
-            <Information
-              key={supplement.ex_id}
-              id={supplement.ex_id}
-              muscle={supplement.target_muscle}
-              title={supplement.exercise_name}
-              type={supplement.mechanics}
-            />
+            <Link href="/exercise/[id]" as={`/exercise/${supplement.ex_id}`}>
+              <a className="cursor-default">
+                <Information
+                  key={supplement.ex_id}
+                  id={supplement.ex_id}
+                  muscle={supplement.target_muscle}
+                  title={supplement.exercise_name}
+                  type={supplement.mechanics}
+                />
+              </a>
+            </Link>
           );
         })}
       </div>
