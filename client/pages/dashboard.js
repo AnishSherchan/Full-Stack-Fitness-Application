@@ -243,6 +243,8 @@ const dashboard = () => {
       } catch (error) {
         console.log(error.message);
       }
+      setweight(w1);
+      setheight(h1);
 
       plana.value = "";
       planb.value = "";

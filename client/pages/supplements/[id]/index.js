@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useRouter } from "next/router";
 import Link from "next/link";
+import Verify from "../../HOC/Verify";
 import Nav from "@components/AppHeader/InfoHeader";
 const supplementsInfo = () => {
   const [company, setcompany] = useState("");
@@ -93,4 +94,4 @@ const supplementsInfo = () => {
   );
 };
 
-export default supplementsInfo;
+export default Verify(supplementsInfo);

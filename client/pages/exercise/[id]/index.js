@@ -3,6 +3,7 @@ import { useRouter } from "next/router";
 import YouTube from "react-youtube";
 var getYouTubeID = require("get-youtube-id");
 import Link from "next/link";
+import Verify from "../../HOC/Verify";
 import Nav from "@components/AppHeader/InfoHeader";
 const exerciseInfo = () => {
   const router = useRouter();
@@ -83,4 +84,4 @@ const exerciseInfo = () => {
   );
 };
 
-export default exerciseInfo;
+export default Verify(exerciseInfo);

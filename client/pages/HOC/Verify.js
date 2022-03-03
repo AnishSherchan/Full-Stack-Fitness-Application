@@ -1,9 +1,9 @@
-import React, { useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import { useRouter } from "next/router";
 const Verify = (WrappedComponent) => {
   return (props) => {
     const router = useRouter();
-    const notVerified = false;
+    const [verified, setverified] = useState(false);
     useEffect(async () => {
       try {
         const rsponse = await fetch("http://localhost:5000/auth/is-verify", {
@@ -13,12 +13,13 @@ const Verify = (WrappedComponent) => {
           },
         });
         const parseRes = await rsponse.json();
+        // replace true with admin
         if (parseRes == true) {
-          notVerified = true;
+          setverified(true);
         } else {
-          notVerified = false;
+          setverified(false);
         }
-        if (notVerified == false) {
+        if (parseRes == "Not Authorize") {
           localStorage.removeItem("token");
           router.push("/");
         }
@@ -27,10 +28,10 @@ const Verify = (WrappedComponent) => {
       }
     }, []);
 
-    if (notVerified === true) {
-      return null;
-    } else {
+    if (verified == true) {
       return <WrappedComponent {...props} />;
+    } else {
+      return null;
     }
   };
 };

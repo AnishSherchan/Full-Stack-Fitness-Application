@@ -8,7 +8,7 @@ interface Props {
 const index: React.FC<Props> = ({ url, title, id }) => {
   return (
     <div>
-      <div className="flex mt-5 rounded-3xl drop-shadow-2xl flex-col h-96 w-80 md:h-96 md:w-96 align-middle  bg-white">
+      <div className="flex mt-5 rounded-3xl drop-shadow-2xl flex-col w-80  md:w-96 align-middle  bg-white">
         <div className="flex my-3  justify-center">
           <img
             className="rounded-xl"

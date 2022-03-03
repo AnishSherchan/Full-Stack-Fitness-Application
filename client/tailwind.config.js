@@ -11,6 +11,7 @@ module.exports = {
         dark: "#474C52",
         primaryButton: "#607FE8",
         back: "#005599",
+        adminDash: "#474C52",
       },
     },
   },
