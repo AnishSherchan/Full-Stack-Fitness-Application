@@ -47,7 +47,7 @@ const supplementsInfo = () => {
   };
   useEffect(() => {
     supplementData();
-  });
+  }, [id]);
   return (
     <div>
       <Nav title={name} />

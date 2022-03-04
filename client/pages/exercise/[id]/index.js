@@ -43,7 +43,7 @@ const exerciseInfo = () => {
   };
   useEffect(() => {
     exerciseData();
-  });
+  }, [id]);
   const opts = {
     height: "290",
     width: "400",

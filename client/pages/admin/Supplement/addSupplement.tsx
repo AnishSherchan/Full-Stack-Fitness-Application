@@ -43,6 +43,15 @@ const addSupplement = () => {
         const parseRes = await response.json();
         console.log(parseRes);
         onReset();
+        toast.success("Supplement Added!", {
+          position: "top-center",
+          autoClose: 3000,
+          hideProgressBar: true,
+          closeOnClick: true,
+          pauseOnHover: false,
+          draggable: true,
+          progress: undefined,
+        });
         getnextId();
       } catch (error) {
         console.log(error.message);

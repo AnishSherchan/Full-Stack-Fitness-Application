@@ -12,6 +12,43 @@ router.get("/users", authorization, async (req, res) => {
     res.status(500).json("Server error");
   }
 });
+// ? Admin List
+router.get("/userRole", authorization, async (req, res) => {
+  try {
+    const users = await pool.query(
+      "SELECT user_id as key, user_name as name, user_email as email FROM users WHERE user_role ='admin';"
+    );
+    res.json(users.rows);
+  } catch (error) {
+    console.error(error.message);
+    res.status(500).json("Server error");
+  }
+});
+// ? user Role update
+router.put("/userRole", authorization, async (req, res) => {
+  try {
+    const { user_email, user_role } = req.body;
+    const userRole = await pool.query(
+      "UPDATE users SET user_role = ($1) WHERE user_email = ($2) RETURNING * ",
+      [user_role, user_email]
+    );
+    res.json(userRole.rows[0]);
+  } catch (err) {
+    console.log(err.message);
+  }
+});
+// ? User's Data for display
+router.get("/usersdata", authorization, async (req, res) => {
+  try {
+    const users = await pool.query(
+      "SELECT user_id as key, user_name as name, user_email as email, user_role as role, account_status as status from users;"
+    );
+    res.json(users.rows);
+  } catch (error) {
+    console.error(error.message);
+    res.status(500).json("Server error");
+  }
+});
 
 // ! Plan
 router.post("/plan", authorization, async (req, res) => {

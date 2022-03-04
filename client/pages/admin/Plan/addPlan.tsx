@@ -1,5 +1,6 @@
 import React from "react";
 import Admins from "../../HOC/admin";
+import { toast } from "react-toastify";
 import { Form, Layout, Input, Button, Select } from "antd";
 import Sidenav from "../../../src/components/Admin_Component/SideNav";
 import Link from "next/link";
@@ -38,6 +39,15 @@ const addPlan = () => {
       });
       const parseRes = await response.json();
       console.log(parseRes);
+      toast.success("Plan Added!", {
+        position: "top-center",
+        autoClose: 3000,
+        hideProgressBar: true,
+        closeOnClick: true,
+        pauseOnHover: false,
+        draggable: true,
+        progress: undefined,
+      });
       onReset();
     } catch (error) {
       console.log(error.message);

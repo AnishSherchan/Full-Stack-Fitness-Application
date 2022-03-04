@@ -25,6 +25,12 @@
     "resolveJsonModule": true,
     "isolatedModules": true
   },
-  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", "pages/dashboard.js"],
+  "include": [
+    "next-env.d.ts",
+    "**/*.ts",
+    "**/*.tsx",
+    "pages/dashboard.js",
+    "pages/admin/Users/index.js"
+  ],
   "exclude": ["node_modules"]
 }

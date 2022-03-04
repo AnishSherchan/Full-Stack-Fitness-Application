@@ -40,6 +40,15 @@ const addExercise = () => {
         const parseRes = await response.json();
         console.log(parseRes);
         onReset();
+        toast.success("Exercise Added!", {
+          position: "top-center",
+          autoClose: 3000,
+          hideProgressBar: true,
+          closeOnClick: true,
+          pauseOnHover: false,
+          draggable: true,
+          progress: undefined,
+        });
         getnextId();
       } catch (error) {
         console.log(error.message);
