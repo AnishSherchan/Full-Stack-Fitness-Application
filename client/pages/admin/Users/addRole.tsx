@@ -9,6 +9,7 @@ const addRole = () => {
   const token = localStorage.token;
   const [email, setUserEmail] = useState("");
   const [role, setUserROle] = useState("");
+  const [adminsEmail, setAdminEmail] = useState("");
   const { Header, Sider, Content } = Layout;
   const { Option } = Select;
   const [form] = Form.useForm();
@@ -33,11 +34,7 @@ const addRole = () => {
     setUserROle(values.user_role);
     let user_email = values.user_email;
     let user_role = values.user_role;
-    // ! Chnage condition
-    if (
-      token ==
-      "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjoiNDNjM2UxNTEtODNjZC00NDJhLWFhNzktN2EzYzRkNDI0NmZjIiwiaWF0IjoxNjQ2NDE5NDE5LCJleHAiOjE2NDY0MjMwMTl9.PXCyNgTpIBxjlb1qo2gQmW6qrn1yUbkqC7ffoZmaSNA"
-    ) {
+    if (adminsEmail == "sherchananish11@gmail.com") {
       if (user_email != "sherchananish11@gmail.com") {
         try {
           const body = { user_email, user_role };
@@ -105,10 +102,25 @@ const addRole = () => {
       console.log(error.message);
     }
   };
+  const adminEmail = async () => {
+    try {
+      const response = await fetch("http://localhost:5000/admin/userEmail", {
+        method: "get",
+        headers: {
+          token: localStorage.token,
+          "Content-type": "application/json",
+        },
+      });
+      const parseRes = await response.json();
+      setAdminEmail(parseRes.user_email);
+    } catch (error) {
+      console.log(error.message);
+    }
+  };
   useEffect(() => {
     admins();
+    adminEmail();
   }, [email]);
-
   return (
     <Layout>
       <Sider>

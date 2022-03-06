@@ -214,4 +214,15 @@ router.post("/exercise", async (req, res) => {
   }
 });
 
+// ! Plans
+router.get("/plan", async (req, res) => {
+  try {
+    const plan = await pool.query("SELECT * FROM plan;");
+    res.json(plan.rows);
+  } catch (error) {
+    console.error(error.message);
+    res.status(500).json("Server error");
+  }
+});
+
 module.exports = router;

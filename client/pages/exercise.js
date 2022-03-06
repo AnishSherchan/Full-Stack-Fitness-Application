@@ -1,11 +1,18 @@
 import React, { useState, useEffect } from "react";
-import { Input } from "antd";
+import { Input, Carousel } from "antd";
 import Image from "next/image";
 import Link from "next/link";
 import Information from "../src/components/ExerciseInfo";
 import Nav from "../src/components/AppHeader/Header";
 import Verify from "./HOC/Verify";
 const exercise = () => {
+  const contentStyle = {
+    height: "260px",
+    color: "#fff",
+    lineHeight: "260px",
+    textAlign: "center",
+    background: "#26282b",
+  };
   const [exercises, setexercises] = useState([]);
   const [search, setSearch] = useState("");
   const exercisesInfo = async () => {
@@ -37,13 +44,40 @@ const exercise = () => {
     <div>
       <Nav buttons={false} verifyContent={true} CurrentPage={3} />
       <div>
-        <Image
-          className=""
-          src="/icons/exercise.svg"
-          alt="Protien"
-          width={1530}
-          height={550}
-        />
+        <Carousel autoplay effect="fade">
+          <div>
+            <h3
+              className="md:text-3xl text-md  tracking-widest"
+              style={contentStyle}
+            >
+              ❝ NOBODY CARES, WORK HARDER ❞
+            </h3>
+          </div>
+          <div>
+            <h3
+              className="md:text-3xl text-md  tracking-widest"
+              style={contentStyle}
+            >
+              ❝ TRAIN INSANE OR REMAIN THE SAME ❞
+            </h3>
+          </div>
+          <div>
+            <h3
+              className="md:text-3xl text-md  tracking-widest"
+              style={contentStyle}
+            >
+              ❝ NO PAIN NO GAIN ❞
+            </h3>
+          </div>
+          <div>
+            <h3
+              className="md:text-3xl text-md  tracking-widest"
+              style={contentStyle}
+            >
+              ❝ TRUST YOURSELF AND CONQUER ❞
+            </h3>
+          </div>
+        </Carousel>
       </div>
       <div className="p-8">
         <div className=" md:flex md:flex-col md:pb-5 md:items-center">

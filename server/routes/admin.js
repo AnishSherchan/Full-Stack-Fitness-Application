@@ -12,6 +12,18 @@ router.get("/users", authorization, async (req, res) => {
     res.status(500).json("Server error");
   }
 });
+router.get("/userEmail", authorization, async (req, res) => {
+  try {
+    const users = await pool.query(
+      "SELECT user_email FROM users WHERE user_id = ($1);",
+      [req.user]
+    );
+    res.json(users.rows[0]);
+  } catch (error) {
+    console.error(error.message);
+    res.status(500).json("Server error");
+  }
+});
 // ? Admin List
 router.get("/userRole", authorization, async (req, res) => {
   try {

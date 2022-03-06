@@ -30,7 +30,9 @@
     "**/*.ts",
     "**/*.tsx",
     "pages/dashboard.js",
-    "pages/admin/Users/index.js"
+    "pages/admin/Users/index.js",
+    "pages/exercise.JS",
+    "pages/plan.js"
   ],
   "exclude": ["node_modules"]
 }
