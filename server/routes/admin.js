@@ -204,4 +204,30 @@ router.get("/exercise", authorization, async (req, res) => {
   }
 });
 
+router.delete("/exercise/:ex_id", authorization, async (req, res) => {
+  try {
+    const { ex_id } = req.params;
+    const deleteexercise = await pool.query(
+      "DELETE FROM exercises WHERE ex_id = $1",
+      [ex_id]
+    );
+    res.json(deleteexercise);
+  } catch (error) {
+    console.log(error);
+  }
+});
+
+router.put("/exercise", authorization, async (req, res) => {
+  try {
+    const { ex_id, exercise_name, target_muscle, equipment_required, url } =
+      req.body;
+    const exerciseUpdate = await pool.query(
+      "UPDATE exercises SET exercise_name = ($2), target_muscle = ($3), equipment_required = ($4), url = ($5) WHERE ex_id = ($1) RETURNING * ",
+      [ex_id, exercise_name, target_muscle, equipment_required, url]
+    );
+    res.json(exerciseUpdate.rows[0]);
+  } catch (err) {
+    console.log(err.message);
+  }
+});
 module.exports = router;

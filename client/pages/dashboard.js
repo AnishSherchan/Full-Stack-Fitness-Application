@@ -16,12 +16,19 @@ import {
   Radio,
   Form,
   Input,
+  Carousel,
 } from "antd";
 import Image from "next/image";
 import { toast } from "react-toastify";
 import Verify from "./HOC/Verify";
 
 const dashboard = () => {
+  const contentStyle = {
+    height: "260px",
+    color: "#fff",
+    lineHeight: "260px",
+    textAlign: "center",
+  };
   const router = useRouter();
   const { Paragraph } = Typography;
   // ? Global Varibale which must be stored in Redux
@@ -427,15 +434,63 @@ const dashboard = () => {
           </Link>
         </div>
       )}
-      <h1 className="text-2xl mt-5 px-10 heading ">Hello {name} 👋</h1>
       {
         // ? First Tag
       }
+
+      <Carousel autoplay effect="fade">
+        <div>
+          <h3
+            className="md:text-3xl bg-fixed bg-no-repeat bg-cover bg-top bg-[url('https://wallpaperaccess.com/full/2079529.jpg')] text-md  tracking-widest"
+            style={contentStyle}
+          >
+            ❝ DON'T WISH FOR IT, WORK FOR IT ❞
+          </h3>
+        </div>
+        <div>
+          <h3
+            className="md:text-3xl bg-fixed bg-no-repeat bg-cover bg-top  bg-[url('https://www.matchroomboxing.com/app/themes/matchroom/dist/images/preloader-24_2672c309.jpg')] text-md  tracking-widest"
+            style={contentStyle}
+          >
+            ❝ TRAIN INSANE OR REMAIN THE SAME ❞
+          </h3>
+        </div>
+        <div>
+          <h3
+            className="md:text-3xl grayscale text-md bg-fixed bg-no-repeat bg-cover bg-center bg-[url('https://library.sportingnews.com/2021-08/khabib-nurmagomedov-cropped_1ldlgbf0wyd3u1eauhuzzkt3yp.jpg')]  tracking-widest"
+            style={contentStyle}
+          >
+            ❝ GO HARD or GO HOME ❞
+          </h3>
+        </div>
+        <div>
+          <h3
+            className="md:text-3xl grayscale  text-md bg-fixed bg-no-repeat bg-cover bg-[url('https://i.guim.co.uk/img/media/1914975a01a04898b32a2da113f4ab581399f776/0_32_2602_1562/master/2602..jpg?width=1200&height=630&quality=85&auto=format&fit=crop&overlay-align=bottom%2Cleft&overlay-width=100p&overlay-base64=L2ltZy9zdGF0aWMvb3ZlcmxheXMvdGctZGVmYXVsdC5wbmc&s=623b14a9df8c9f77148024b0b71c9c99')] bg-top  tracking-widest"
+            style={contentStyle}
+          >
+            ❝ TRUST YOURSELF AND CONQUER ❞
+          </h3>
+        </div>
+      </Carousel>
+
+      <h1 className="text-2xl mt-5 mb-0 px-4 text-center heading ">
+        Hello {name} 👋
+      </h1>
+
+      <div className="mb-0">
+        <h1 className="text-3xl tracking-widest  text-gray-600 text-center mb-0 py-4 px-4 heading ">
+          ❛ Welcome to{" "}
+          <span className="font-semibold text-primaryButton">
+            GUARDIAN FITNESS{" "}
+          </span>
+          ❜
+        </h1>
+      </div>
       <div className="md:flex md:flex-col md:pb-5 md:items-center">
         <div className="h-fitcontent md:w-8/12 md:py-3 py-2 bg-navcolor rounded-3xl drop-shadow-2xl md:mt-11">
           <h1 className="text-2xl mt-5 px-10 text-center ">User Profile</h1>
           <div className="md:flex justify-center  ">
-            <div className="py-6 md:flex hidden flex-shrink-0">
+            <div className="py-6 tablet:flex hidden flex-shrink-0">
               <Image
                 src="/icons/User.svg"
                 alt="Logo"
@@ -444,19 +499,57 @@ const dashboard = () => {
               />
             </div>
             <div className="py-6 md:py-10 px-10">
-              <p className="text-lg text-center md:text-left">Name : {name} </p>
-              <p className="text-lg text-center md:text-left">
-                Date Of birth : {dob}
+              <p className="text-lg items-center flex text-center md:text-left">
+                <img
+                  className="px-4"
+                  style={{ height: "30px" }}
+                  src="https://cdn-icons-png.flaticon.com/512/1759/1759311.png"
+                ></img>
+                Name : {name}{" "}
               </p>
-              <p className="text-lg text-center md:text-left">
+              <p className="text-lg items-center flex text-center md:text-left">
+                <img
+                  className="px-4"
+                  style={{ height: "30px" }}
+                  src="https://cdn-icons-png.flaticon.com/512/6938/6938604.png"
+                ></img>
+                Date Of birth : {dob} &nbsp; <a>Edit</a>
+              </p>
+              <p className=" items-center flex text-lg text-center md:text-left">
+                <img
+                  className="px-4"
+                  style={{ height: "30px" }}
+                  src="https://cdn-icons.flaticon.com/png/128/3746/premium/3746552.png?token=exp=1646651311~hmac=022cda9eb744ac2545aaaed68df57b52"
+                ></img>{" "}
                 Weight : {weight} kgs
               </p>
-              <p className="text-lg text-center md:text-left">
+              <p className="items-center flex text-lg text-center md:text-left">
+                <img
+                  className="px-4"
+                  style={{ height: "30px" }}
+                  src="https://cdn-icons-png.flaticon.com/512/5559/5559879.png"
+                ></img>{" "}
                 Height : {height} cm
               </p>
-              <p className="hidden md:flex md:text-lg md:text-left">
+              <p className="items-center flex text-lg text-center md:text-left">
+                <img
+                  className="px-4"
+                  style={{ height: "30px" }}
+                  src="https://cdn-icons.flaticon.com/png/512/3131/premium/3131619.png?token=exp=1646652052~hmac=f88c88b1c84bc9969de1af48de746c2f"
+                ></img>{" "}
+                Your Notes &nbsp; <a> Check</a>
+              </p>
+              <p className="hidden items-center  md:flex md:text-lg md:text-left">
+                <img
+                  className="px-4"
+                  style={{ height: "30px" }}
+                  src="https://cdn-icons-png.flaticon.com/512/752/752687.png"
+                ></img>{" "}
                 User id :
-                <Paragraph style={{ fontSize: "15px" }} copyable>
+                <Paragraph
+                  style={{ fontSize: "15px", paddingTop: "13px" }}
+                  copyable
+                >
                   {userid}
                 </Paragraph>
               </p>
