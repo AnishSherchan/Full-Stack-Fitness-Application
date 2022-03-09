@@ -204,7 +204,7 @@ router.get("/exercise", authorization, async (req, res) => {
   }
 });
 
-router.delete("/exercise/:ex_id", authorization, async (req, res) => {
+router.delete("/exercise/:ex_id", async (req, res) => {
   try {
     const { ex_id } = req.params;
     const deleteexercise = await pool.query(

@@ -2,15 +2,54 @@
 import React from "react";
 import Image from "next/image";
 import Nav from "../src/components/AppHeader/Header.tsx";
-import { Button } from "antd";
+import { Button, Carousel } from "antd";
 import Link from "next/link";
 
 const landing = () => {
+  const contentStyle = {
+    height: "250px",
+    color: "#fff",
+    lineHeight: "250px",
+    textAlign: "center",
+  };
   return (
     <div className="contmain">
       {/* Navbar for Landing page */}
       <Nav buttons={true} verifyContent={false} CurrentPage={0} />
-
+      <Carousel autoplay effect="fade">
+        <div>
+          <h3
+            className="md:text-3xl  font-bold  bg-fixed bg-no-repeat bg-cover bg-top bg-[url('https://wallpaperaccess.com/full/1097428.jpg')] text-md  tracking-widest"
+            style={contentStyle}
+          >
+            ❝ WELCOME TO GUARDIAN FITNESS ❞
+          </h3>
+        </div>
+        <div>
+          <h3
+            className="md:text-3xl bg-fixed bg-no-repeat bg-cover bg-top  bg-[url('https://www.matchroomboxing.com/app/themes/matchroom/dist/images/preloader-24_2672c309.jpg')] text-md  tracking-widest"
+            style={contentStyle}
+          >
+            ❝ TRAIN INSANE OR REMAIN THE SAME ❞
+          </h3>
+        </div>
+        <div>
+          <h3
+            className="md:text-3xl grayscale  text-md bg-fixed bg-no-repeat bg-cover bg-[url('https://a3.espncdn.com/combiner/i?img=%2Fphoto%2F2016%2F1122%2Fr154934_1296x729_16%2D9.jpg')] bg-top  tracking-widest"
+            style={contentStyle}
+          >
+            ❝ TRUST YOURSELF AND CONQUER ❞
+          </h3>
+        </div>
+        <div>
+          <h3
+            className="md:text-3xl text-md bg-fixed bg-no-repeat bg-cover bg-top bg-[url('https://www.cleveland.com/resizer/n_t4A3IGcZibGgMyhjF2-tzHV70=/1280x0/smart/arc-anglerfish-arc2-prod-advancelocal.s3.amazonaws.com/public/HJN5GBYAN5DXTBF7PSU3P4CW7Q.jpg')]  tracking-widest"
+            style={contentStyle}
+          >
+            ❝ GO HARD or GO HOME ❞
+          </h3>
+        </div>
+      </Carousel>
       {/* Body of the index page */}
       {/* First div */}
       <div
