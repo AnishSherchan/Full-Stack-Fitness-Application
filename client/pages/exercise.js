@@ -7,11 +7,10 @@ import Nav from "../src/components/AppHeader/Header";
 import Verify from "./HOC/Verify";
 const exercise = () => {
   const contentStyle = {
-    height: "260px",
+    height: "290px",
     color: "#fff",
-    lineHeight: "260px",
+    lineHeight: "290px",
     textAlign: "center",
-    background: "#26282b",
   };
   const [exercises, setexercises] = useState([]);
   const [search, setSearch] = useState("");
@@ -47,15 +46,15 @@ const exercise = () => {
         <Carousel autoplay effect="fade">
           <div>
             <h3
-              className="md:text-3xl text-md  tracking-widest"
+              className="md:text-3xl bg-fixed grayscale bg-no-repeat bg-cover bg-center bg-[url('https://www.gannett-cdn.com/presto/2021/04/25/USAT/e01a0394-b6b4-4aa0-8639-a79ec8ad8347-USATSI_15962526.jpg?width=2560')] text-md  tracking-widest"
               style={contentStyle}
             >
-              ❝ NOBODY CARES, WORK HARDER ❞
+              ❝ TRUST YOURSELF AND CONQUER ❞
             </h3>
           </div>
           <div>
             <h3
-              className="md:text-3xl text-md  tracking-widest"
+              className="md:text-3xl grayscale bg-fixed bg-no-repeat bg-cover bg-top bg-[url('https://wallpapercave.com/wp/wp4664065.jpg')] text-md  tracking-widest"
               style={contentStyle}
             >
               ❝ TRAIN INSANE OR REMAIN THE SAME ❞
@@ -63,18 +62,19 @@ const exercise = () => {
           </div>
           <div>
             <h3
-              className="md:text-3xl text-md  tracking-widest"
+              className="md:text-3xl grayscale bg-fixed bg-no-repeat bg-cover bg-top bg-[url('https://firstsportz.com/wp-content/uploads/2022/01/CC_Express_20220113_1625160-1.jpg')] text-md  tracking-widest"
+              style={contentStyle}
+            >
+              ❝ NOBODY CARES, WORK HARDER ❞
+            </h3>
+          </div>
+
+          <div>
+            <h3
+              className="md:text-3xl bg-fixed bg-no-repeat bg-cover bg-top bg-[url('https://wallpaperaccess.com/full/2079529.jpg')] text-md  tracking-widest"
               style={contentStyle}
             >
               ❝ NO PAIN NO GAIN ❞
-            </h3>
-          </div>
-          <div>
-            <h3
-              className="md:text-3xl text-md  tracking-widest"
-              style={contentStyle}
-            >
-              ❝ TRUST YOURSELF AND CONQUER ❞
             </h3>
           </div>
         </Carousel>

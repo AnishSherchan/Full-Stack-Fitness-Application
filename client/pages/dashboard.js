@@ -695,8 +695,8 @@ const dashboard = () => {
       {
         // ?Second Tag
       }
-      <div className="px-5 py-3 md:bg-dark pb-6">
-        <h1 className="text-2xl md:pt-6 md:text-white px-10 text-center ">
+      <div className="px-5 py-3 pb-6 bg-fixed bg-no-repeat bg-cover bg-top tablet:bg-[url('https://wallpaperaccess.com/full/2079529.jpg')]">
+        <h1 className="text-3xl drop-shadow-2xl md:pt-6 tablet:text-white px-10 text-center ">
           Body Metric
         </h1>
         <div className="md:flex md:flex-col md:items-center">

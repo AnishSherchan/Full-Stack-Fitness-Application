@@ -7,11 +7,10 @@ import Nav from "../src/components/AppHeader/Header";
 import Link from "next/link";
 const plan = () => {
   const contentStyle = {
-    height: "260px",
+    height: "290px",
     color: "#fff",
-    lineHeight: "260px",
+    lineHeight: "290px",
     textAlign: "center",
-    background: "#26282b",
   };
   const [goal, setusergoal] = useState("");
 
@@ -87,15 +86,7 @@ const plan = () => {
       <Carousel autoplay effect="fade">
         <div>
           <h3
-            className="md:text-3xl text-md  tracking-widest"
-            style={contentStyle}
-          >
-            ❝ TRAIN INSANE OR REMAIN THE SAME ❞
-          </h3>
-        </div>
-        <div>
-          <h3
-            className="md:text-3xl text-md  tracking-widest"
+            className="md:text-3xl grayscale bg-fixed bg-no-repeat bg-cover bg-top bg-[url('https://www.sportsnet.ca/wp-content/uploads/2017/07/jones_jon1280.jpg')] text-md  tracking-widest"
             style={contentStyle}
           >
             ❝ DON'T WISH FOR IT, WORK FOR IT ❞
@@ -103,15 +94,23 @@ const plan = () => {
         </div>
         <div>
           <h3
-            className="md:text-3xl text-md  tracking-widest"
+            className="md:text-3xl grayscale text-md bg-fixed bg-no-repeat bg-cover bg-top bg-[url('https://image-cdn.essentiallysports.com/wp-content/uploads/undertaker-wrestlemania.png')]  tracking-widest"
             style={contentStyle}
           >
-            ❝ GO HARD or GO HOME ❞
+            ❝ GO HARD or GO Hell ❞
           </h3>
         </div>
         <div>
           <h3
-            className="md:text-3xl text-md  tracking-widest"
+            className="md:text-3xl bg-fixed grayscale bg-no-repeat bg-cover bg-top  bg-[url('https://www.meme-arsenal.com/memes/f03f84c98ba62a8bb0ad8e62f8e400b6.jpg')] text-md  tracking-widest"
+            style={contentStyle}
+          >
+            ❝ TRAIN INSANE OR REMAIN THE SAME ❞
+          </h3>
+        </div>
+        <div>
+          <h3
+            className="md:text-3xl grayscale  text-md bg-fixed bg-no-repeat bg-cover bg-[url('https://i.ytimg.com/vi/NH-o9U8G7-4/maxresdefault.jpg')] bg-center  tracking-widest"
             style={contentStyle}
           >
             ❝ TRUST YOURSELF AND CONQUER ❞
