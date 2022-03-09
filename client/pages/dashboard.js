@@ -14,6 +14,7 @@ import {
   Form,
   Input,
   Carousel,
+  DatePicker,
 } from "antd";
 import Image from "next/image";
 import { toast } from "react-toastify";
@@ -29,9 +30,11 @@ const dashboard = () => {
   const router = useRouter();
   const { Paragraph } = Typography;
   // ? Global Varibale which must be stored in Redux
+  const dateFormat = "YYYY-MM-DD";
   const [name, setname] = useState("");
   const [userid, setuserid] = useState("");
   const [goal, setusergoal] = useState("");
+  let dobs = "";
   const [dob, setdob] = useState("");
   const [height, setheight] = useState("");
   const [weight, setweight] = useState("");
@@ -50,7 +53,27 @@ const dashboard = () => {
   let thigh = 0;
   let claves = 0;
   // ? Modal
-
+  const onChangeDate = async (date, dateString) => {
+    dobs = dateString;
+    console.log(dobs);
+    try {
+      const body = { dobs };
+      console.log(body);
+      const response = await fetch("http://localhost:5000/dashboard/userdate", {
+        method: "PUT",
+        headers: {
+          token: localStorage.token,
+          "Content-type": "application/json",
+        },
+        body: JSON.stringify(body),
+      });
+      const parseRes = await response.json();
+      console.log(parseRes);
+    } catch (error) {
+      console.log(error.message);
+    }
+    setdob(dobs);
+  };
   const { Option } = Select;
   const children = [];
   const disease = [
@@ -82,6 +105,21 @@ const dashboard = () => {
 
   const showMeasureModal = () => {
     setModalVisible(true);
+  };
+
+  // ? Date modal
+  const [isDateModalVisible, setIsdateModalVisible] = useState(false);
+
+  const showModaldate = () => {
+    setIsdateModalVisible(true);
+  };
+
+  const handleOkdate = async () => {
+    setIsdateModalVisible(false);
+  };
+
+  const handleCanceldate = () => {
+    setIsdateModalVisible(false);
   };
 
   const userhealth = async () => {
@@ -431,12 +469,26 @@ const dashboard = () => {
           </Link>
         </div>
       )}
+      <Modal
+        title="Basic Modal"
+        visible={isDateModalVisible}
+        onOk={handleOkdate}
+        onCancel={handleCanceldate}
+        showTime={false}
+      >
+        <DatePicker
+          size="large"
+          style={{ width: "100%", borderRadius: "15px" }}
+          format={dateFormat}
+          onChange={onChangeDate}
+        />
+      </Modal>
       {
         // ? First Tag
       }
 
       <Carousel autoplay effect="fade">
-        <div>
+        <div className="">
           <h3
             className="md:text-3xl bg-fixed bg-no-repeat bg-cover bg-top bg-[url('https://wallpaperaccess.com/full/2079529.jpg')] text-md  tracking-widest"
             style={contentStyle}
@@ -510,7 +562,7 @@ const dashboard = () => {
                   style={{ height: "30px" }}
                   src="https://cdn-icons-png.flaticon.com/512/6938/6938604.png"
                 ></img>
-                Date Of birth : {dob} &nbsp; <a>Edit</a>
+                Date Of birth : {dob} &nbsp; <a onClick={showModaldate}>Edit</a>
               </p>
               <p className=" items-center flex text-lg text-center md:text-left">
                 <img

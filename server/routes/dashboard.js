@@ -76,6 +76,20 @@ router.put("/usergoal", authorization, async (req, res) => {
   }
 });
 
+router.put("/userdate", authorization, async (req, res) => {
+  try {
+    const { dobs } = req.body;
+    const user_id = req.user;
+    const userdate = await pool.query(
+      "UPDATE user_info SET dob = ($1) WHERE user_id = ($2) RETURNING * ",
+      [dobs, user_id]
+    );
+    res.json(userdate.rows[0]);
+  } catch (err) {
+    console.log(err.message);
+  }
+});
+
 // ? user wEIGHT AND HEIGHT update
 router.put("/userheightweight", authorization, async (req, res) => {
   try {
