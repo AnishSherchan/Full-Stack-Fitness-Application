@@ -109,6 +109,39 @@ router.get("/plan", authorization, async (req, res) => {
   }
 });
 
+router.delete("/plan/:plan_id", async (req, res) => {
+  try {
+    const { plan_id } = req.params;
+    const deletePlan = await pool.query("DELETE FROM plan WHERE plan_id = $1", [
+      plan_id,
+    ]);
+    res.json(deletePlan);
+  } catch (error) {
+    console.log(error);
+  }
+});
+
+router.put("/plan", authorization, async (req, res) => {
+  try {
+    const {
+      plan_id,
+      plan_name,
+      plan_type,
+      health_condition,
+      genders,
+      age_group,
+      url,
+    } = req.body;
+    const planUpdate = await pool.query(
+      "UPDATE plan SET plan_name = ($2), plan_type = ($3), health_condition = ($4), genders = ($5), age_group = ($6), url = ($7) WHERE plan_id = ($1) RETURNING * ",
+      [plan_id, plan_name, plan_type, health_condition, genders, age_group, url]
+    );
+    res.json(planUpdate.rows[0]);
+  } catch (err) {
+    console.log(err.message);
+  }
+});
+
 // ! Supplements
 router.post("/supplement", authorization, async (req, res) => {
   try {
