@@ -234,6 +234,7 @@ const SupplementsAdmin = () => {
               resetEditing();
             }}
           >
+            <p>Supplement Name</p>
             <Input
               name="exe_name"
               value={editingStudent?.supplement_name}
@@ -243,7 +244,7 @@ const SupplementsAdmin = () => {
                 });
               }}
             />
-
+            <p>Company Name</p>
             <Input
               value={editingStudent?.company}
               onChange={(e) => {
@@ -252,6 +253,7 @@ const SupplementsAdmin = () => {
                 });
               }}
             />
+            <p>Energy per 100g</p>
             <Input
               value={editingStudent?.energy}
               onChange={(e) => {
@@ -260,6 +262,7 @@ const SupplementsAdmin = () => {
                 });
               }}
             />
+            <p>Protein per 100g</p>
             <Input
               value={editingStudent?.protein}
               onChange={(e) => {
@@ -268,6 +271,7 @@ const SupplementsAdmin = () => {
                 });
               }}
             />
+            <p>Carbs per 100g</p>
             <Input
               value={editingStudent?.carbs}
               onChange={(e) => {
@@ -276,6 +280,7 @@ const SupplementsAdmin = () => {
                 });
               }}
             />
+            <p>Image Url</p>
             <Input
               value={editingStudent?.image_url}
               onChange={(e) => {

@@ -230,6 +230,7 @@ const PlanAdmin = () => {
               resetEditing();
             }}
           >
+            <p>Plan Name</p>
             <Input
               name="exe_name"
               value={editingStudent?.plan_name}
@@ -239,7 +240,7 @@ const PlanAdmin = () => {
                 });
               }}
             />
-
+            <p>Plan Type</p>
             <Select
               placeholder="Select plan type"
               value={editingStudent?.plan_type}
@@ -254,7 +255,8 @@ const PlanAdmin = () => {
               <Option value="Fat Loss">Fat Loss</Option>
               <Option value="Stretching">Stretching</Option>
             </Select>
-
+            <hr />
+            <p>Health Condition?</p>
             <Select
               placeholder="Plan for ill people? "
               value={editingStudent?.health_condition}
@@ -267,7 +269,8 @@ const PlanAdmin = () => {
               <Option value="No">No</Option>
               <Option value="Yes">Yes</Option>
             </Select>
-
+            <hr />
+            <p>Gender</p>
             <Select
               placeholder="Select a option and change input text above"
               value={editingStudent?.genders}
@@ -280,7 +283,8 @@ const PlanAdmin = () => {
               <Option value="male">male</Option>
               <Option value="female">female</Option>
             </Select>
-
+            <hr />
+            <p>Age Group</p>
             <Select
               placeholder="Select Age group"
               value={editingStudent?.age_group}
@@ -295,7 +299,7 @@ const PlanAdmin = () => {
               <Option value="Middle Aged">Middle Aged</Option>
               <Option value="Old">Old</Option>
             </Select>
-
+            <p>Drive URL</p>
             <Input
               value={editingStudent?.url}
               onChange={(e) => {

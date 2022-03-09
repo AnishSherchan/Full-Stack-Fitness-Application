@@ -215,6 +215,7 @@ const ExerciseAdmin = () => {
               resetEditing();
             }}
           >
+            <p>Exercise Name</p>
             <Input
               name="exe_name"
               value={editingStudent?.exercise_name}
@@ -224,6 +225,7 @@ const ExerciseAdmin = () => {
                 });
               }}
             />
+            <p>Target Muscle</p>
             <Input
               value={editingStudent?.target_muscle}
               onChange={(e) => {
@@ -232,6 +234,7 @@ const ExerciseAdmin = () => {
                 });
               }}
             />
+            <p>Equipment Required</p>
             <Input
               value={editingStudent?.equipment_required}
               onChange={(e) => {
@@ -240,6 +243,7 @@ const ExerciseAdmin = () => {
                 });
               }}
             />
+            <p>Youtube URL </p>
             <Input
               value={editingStudent?.url}
               onChange={(e) => {
