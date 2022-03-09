@@ -35,7 +35,7 @@ const landing = () => {
         </div>
         <div>
           <h3
-            className="md:text-3xl grayscale  text-md bg-fixed bg-no-repeat bg-cover bg-[url('https://a3.espncdn.com/combiner/i?img=%2Fphoto%2F2016%2F1122%2Fr154934_1296x729_16%2D9.jpg')] bg-top  tracking-widest"
+            className="md:text-3xl grayscale  text-md bg-fixed bg-no-repeat bg-cover bg-[url('https://a3.espncdn.com/combiner/i?img=%2Fphoto%2F2016%2F1122%2Fr154934_1296x729_16%2D9.jpg')] bg-center  tracking-widest"
             style={contentStyle}
           >
             ❝ TRUST YOURSELF AND CONQUER ❞

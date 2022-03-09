@@ -62,7 +62,7 @@ const PlanAdmin = () => {
 
           const parseRes = await response.json();
           console.log(parseRes);
-          toast.success("Exercise Deleted", {
+          toast.success("Plan Deleted", {
             position: "top-center",
             autoClose: 3000,
             hideProgressBar: true,
@@ -93,6 +93,7 @@ const PlanAdmin = () => {
       key: "1",
       title: "ID",
       dataIndex: "plan_id",
+      sorter: (a, b) => a.plan_id - b.plan_id,
     },
     {
       key: "2",
@@ -182,9 +183,9 @@ const PlanAdmin = () => {
           </div>
           <div className="md:flex md:flex-col md:items-center ">
             <div className="h-fitcontent p-5 md:w-11/12 md:bg-navcolor rounded-3xl drop-shadow-2xl mb-6 md:mt-11">
-              <p className="text-center text-xl">Exercise</p>
+              <p className="text-center text-xl">Workout Plans</p>
               <Table
-                title={() => "Edit Exercise"}
+                title={() => "Edit Plan"}
                 bordered
                 columns={columns}
                 dataSource={exercises}

@@ -191,6 +191,48 @@ router.get("/supplement", authorization, async (req, res) => {
   }
 });
 
+router.delete("/supplement/:supplement_id", async (req, res) => {
+  try {
+    const { supplement_id } = req.params;
+    const deletedsupplement = await pool.query(
+      "DELETE FROM supplement WHERE supplement_id = $1",
+      [supplement_id]
+    );
+    res.json(deletedsupplement);
+  } catch (error) {
+    console.log(error);
+  }
+});
+
+router.put("/supplement", authorization, async (req, res) => {
+  try {
+    const {
+      supplement_id,
+      supplement_name,
+      company,
+      energy,
+      protein,
+      carbs,
+      image_url,
+    } = req.body;
+    const suppUpdate = await pool.query(
+      "UPDATE supplement SET supplement_name = ($2), company = ($3), energy = ($4), protein = ($5), carbs = ($6), image_url = ($7) WHERE supplement_id = ($1) RETURNING * ",
+      [
+        supplement_id,
+        supplement_name,
+        company,
+        energy,
+        protein,
+        carbs,
+        image_url,
+      ]
+    );
+    res.json(suppUpdate.rows[0]);
+  } catch (err) {
+    console.log(err.message);
+  }
+});
+
 // ! Exercise
 router.post("/exercise", authorization, async (req, res) => {
   try {

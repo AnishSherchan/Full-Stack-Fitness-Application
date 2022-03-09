@@ -89,6 +89,7 @@ const ExerciseAdmin = () => {
       key: "1",
       title: "ID",
       dataIndex: "ex_id",
+      sorter: (a, b) => a.ex_id - b.ex_id,
     },
     {
       key: "2",
