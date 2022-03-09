@@ -90,7 +90,7 @@ const plan = () => {
             className="md:text-3xl text-md  tracking-widest"
             style={contentStyle}
           >
-            ❝ TRAIN INSANE OR REMAIN THE SAME ❞
+            ❝ DON'T WISH FOR IT, WORK FOR IT ❞
           </h3>
         </div>
         <div>
@@ -98,7 +98,7 @@ const plan = () => {
             className="md:text-3xl text-md  tracking-widest"
             style={contentStyle}
           >
-            ❝ DON'T WISH FOR IT, WORK FOR IT ❞
+            ❝ TRAIN INSANE OR REMAIN THE SAME ❞
           </h3>
         </div>
         <div>
@@ -119,11 +119,11 @@ const plan = () => {
         </div>
       </Carousel>
       <div className=" px-5 ">
-        <h1 className="text-center heading text-3xl">Your Plans</h1>
+        <h1 className="text-center heading text-2xl">Your Plans</h1>
         <div className="flex flex-wrap justify-around items-center mb-4">
           <div>
-            <div className=" px-14 flex mt-5 py-3 border-2 ml-4 rounded-xl drop-shadow-2xl flex-col h-fit align-middle bg-neutral-100 ">
-              <h1 className="text-xl mt-4">Change your plan </h1>
+            <div className="flex mt-5 px-5 border-2 ml-4 rounded-xl drop-shadow-2xl flex-col h-fit w-80  md:w-96 align-middle bg-neutral-100 ">
+              <h1 className="text-lg mt-4">Change your plan </h1>
               <div className="flex my-3 justify-center">
                 <Radio.Group
                   name="radiogroup"

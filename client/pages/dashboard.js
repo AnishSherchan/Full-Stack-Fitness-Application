@@ -1,6 +1,3 @@
-// Todo Complete Dashboard
-// Todo Create Save Changes Function
-// Todo Create BMI calculate Function
 import React, { useState, useEffect } from "react";
 import { useRouter } from "next/router";
 import Link from "next/link";

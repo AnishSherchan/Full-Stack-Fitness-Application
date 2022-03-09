@@ -5,10 +5,6 @@ module.exports = {
   ],
   theme: {
     extend: {
-      screens: {
-        tablet: "950px",
-        // => @media (min-width: 640px) { ... }
-      },
       colors: {
         bgcolor: "#E1E5E8",
         navcolor: "#F3F6F7",
@@ -16,7 +12,6 @@ module.exports = {
         primaryButton: "#607FE8",
         back: "#005599",
         adminDash: "#474C52",
-        slider: "#26282b",
       },
     },
   },
