@@ -46,7 +46,7 @@ const ListNotes = () => {
             <button onClick={() => deleteNotes(note.note_id)}>
               {" "}
               <img
-                src="https://img.icons8.com/plasticine/344/filled-trash.png"
+                src="https://freepikpsd.com/file/2019/10/delete-icon-png-red-5-Transparent-Images.png"
                 style={{ height: "45px" }}
                 alt="edit"
               />
