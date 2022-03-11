@@ -17,6 +17,8 @@ module.exports = {
         back: "#005599",
         adminDash: "#474C52",
         slider: "#26282b",
+        notes: "#ffdca1",
+        notesBorder: "#ffd185",
       },
     },
   },

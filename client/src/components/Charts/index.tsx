@@ -88,7 +88,7 @@ const index = () => {
     ],
   };
   return (
-    <div className="p-4 shadow-lg shadow-blue-300 bg-white rounded-3xl">
+    <div className="p-4 bg-white rounded-3xl">
       <Bar width="800px" height="400px" options={options} data={data} />
     </div>
   );

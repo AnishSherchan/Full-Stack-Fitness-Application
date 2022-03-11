@@ -35,15 +35,28 @@ const plan = () => {
       console.log(error.message);
     }
   };
-
+  const check = (plans) => {
+    if (
+      plans.genders == "male" &&
+      plans.age_group == "Adult" &&
+      plans.plan_type == "Build Muscle"
+    ) {
+      return plans;
+    }
+  };
+  // ! Call this function each time when we change goal for user
   const SupplementInfo = async () => {
     try {
       const response = await fetch("http://localhost:5000/dashboard/plan", {
         method: "get",
       });
       const parseRes = await response.json();
-      setexercises(parseRes);
       console.log(parseRes);
+      // ! get all plans in individual array
+      const hcs = parseRes.filter(check);
+      console.log(hcs);
+      // ! Keep if condition here for displaying data
+      setexercises(parseRes);
     } catch (error) {
       console.log(error.message);
     }

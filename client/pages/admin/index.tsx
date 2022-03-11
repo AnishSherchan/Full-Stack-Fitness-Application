@@ -111,7 +111,7 @@ const admindashboard = () => {
         <Layout>
           <div className="fixed bg-primaryButton p-1 px-4 rounded-xl z-10 bottom-0 right-0 m-3">
             <Link href="/dashboard">
-              <a className="text-white">User pannel</a>
+              <a className="text-white">User panel</a>
             </Link>
           </div>
           <div className="z-10 sticky top-0 left-0 right-0 mb-5">

@@ -66,3 +66,10 @@ CREATE Table plan(
     genders VARCHAR(255) NOT NULL,
     age_group VARCHAR(255) NOT NULL
 );
+
+CREATE Table user_notes(
+    note_id SERIAL PRIMARY KEY,
+    notes VARCHAR(255) NOT NULL,
+    user_id uuid,
+    FOREIGN KEY(user_id) REFERENCES users(user_id)
+);

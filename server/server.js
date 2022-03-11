@@ -10,6 +10,7 @@ app.use(cors());
 app.use("/auth", require("./routes/Auth"));
 app.use("/dashboard", require("./routes/dashboard"));
 app.use("/admin", require("./routes/admin"));
+app.use("/notes", require("./routes/notes"));
 // ?Server at 5000
 app.listen(5000, () => {
   console.log("Hello on!");

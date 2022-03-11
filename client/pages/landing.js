@@ -73,7 +73,7 @@ const landing = () => {
                   borderRadius: "10px",
                   height: "50px",
                   width: "135px",
-                  boxShadow: "4px 4px grey",
+                  boxShadow: "1px 1px grey",
                   border: "none",
                 }}
               >
@@ -127,7 +127,7 @@ const landing = () => {
                   borderRadius: "10px",
                   height: "50px",
                   width: "195px",
-                  boxShadow: "4px 4px #9A9A9A",
+                  boxShadow: "1px 1px #9A9A9A",
                   border: "none",
                 }}
               >

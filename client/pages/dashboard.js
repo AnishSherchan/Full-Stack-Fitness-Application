@@ -465,12 +465,12 @@ const dashboard = () => {
       {adminrole == true && (
         <div className="fixed bg-primaryButton p-1 px-4 rounded-xl z-10 bottom-0 right-0 m-3">
           <Link href="/admin">
-            <a className="text-white">Admin pannel</a>
+            <a className="text-white">Admin panel</a>
           </Link>
         </div>
       )}
       <Modal
-        title="Basic Modal"
+        title="Change your Date of birth?"
         visible={isDateModalVisible}
         onOk={handleOkdate}
         onCancel={handleCanceldate}
@@ -580,14 +580,17 @@ const dashboard = () => {
                 ></img>{" "}
                 Height : {height} cm
               </p>
-              <p className="items-center flex text-lg text-center md:text-left">
-                <img
-                  className="px-4"
-                  style={{ height: "30px" }}
-                  src="https://cdn-icons.flaticon.com/png/512/3131/premium/3131619.png?token=exp=1646652052~hmac=f88c88b1c84bc9969de1af48de746c2f"
-                ></img>{" "}
-                Your Notes &nbsp; <a> Check</a>
-              </p>
+              <Link href="/Notes">
+                <p className="items-center flex text-lg text-center md:text-left">
+                  <img
+                    className="px-4"
+                    style={{ height: "30px" }}
+                    src="https://cdn-icons.flaticon.com/png/512/3131/premium/3131619.png?token=exp=1646652052~hmac=f88c88b1c84bc9969de1af48de746c2f"
+                  ></img>{" "}
+                  Your Notes &nbsp; <a> Check</a>
+                </p>
+              </Link>
+
               <p className="hidden items-center  md:flex md:text-lg md:text-left">
                 <img
                   className="px-4"

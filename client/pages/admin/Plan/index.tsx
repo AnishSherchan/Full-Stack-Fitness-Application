@@ -178,7 +178,7 @@ const PlanAdmin = () => {
         <Content style={{ backgroundColor: "#e1e5e8" }}>
           <div className="fixed bg-primaryButton p-1 px-4 rounded-xl z-10 bottom-0 right-0 m-3">
             <Link href="/dashboard">
-              <a className="text-white">User pannel</a>
+              <a className="text-white">User panel</a>
             </Link>
           </div>
           <div className="md:flex md:flex-col md:items-center ">
