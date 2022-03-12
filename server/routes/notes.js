@@ -43,15 +43,14 @@ router.get("/notes/:id", authorization, async (req, res) => {
 });
 
 // Update a user_notes
-router.put("/notes/:id", async (req, res) => {
+router.put("/notes", async (req, res) => {
   try {
-    const { id } = req.params;
-    const { notes } = req.body;
+    const { notes, note_id } = req.body;
     const UpTodo = await pool.query(
       "UPDATE user_notes SET notes = ($1) WHERE note_id = ($2) RETURNING * ",
-      [notes, id]
+      [notes, note_id]
     );
-    res.json(UpTodo.rows);
+    res.json(UpTodo.rows[0]);
   } catch (err) {
     console.log(err.message);
   }
