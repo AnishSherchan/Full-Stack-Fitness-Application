@@ -47,6 +47,7 @@ router.post("/userinfo", authorization, async (req, res) => {
     res.status(5000).json("Server Error");
   }
 });
+
 // ? API for  user_inforamtion
 router.get("/userinformation", authorization, async (req, res) => {
   try {
@@ -172,6 +173,20 @@ router.delete("/userhealth", authorization, async (req, res) => {
   } catch (error) {
     console.log(error.message);
     res.status(5000).json("Server Error");
+  }
+});
+
+router.get("/userhealth", authorization, async (req, res) => {
+  try {
+    const user_id = req.user;
+    const user_health = await pool.query(
+      "SELECT * FROM user_health WHERE user_id = ($1);",
+      [user_id]
+    );
+    res.json(user_health.rows.length);
+  } catch (error) {
+    console.error(error.message);
+    res.status(500).json("Server error");
   }
 });
 
