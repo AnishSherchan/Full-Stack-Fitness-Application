@@ -12,10 +12,40 @@ const plan = () => {
     lineHeight: "290px",
     textAlign: "center",
   };
+  // ? Plan filtering datas
   const [goal, setusergoal] = useState("");
-
+  const [Health_Condition, setHealth] = useState(null);
+  const [gender, setGender] = useState("");
+  const [age, setAge] = useState(null);
+  // ? Plans data
   const [exercises, setexercises] = useState([]);
   const [search, setSearch] = useState("");
+  const getUserAge = async () => {
+    try {
+      const response = await fetch("http://localhost:5000/dashboard/userage", {
+        method: "get",
+        headers: {
+          token: localStorage.token,
+        },
+      });
+      const parseRes = await response.json();
+      console.log(parseRes);
+      if (parseRes <= 16) {
+        setAge("Baby");
+      }
+      if (parseRes <= 45 && parseRes >= 17) {
+        setAge("Adult");
+      }
+      if (parseRes <= 59 && parseRes >= 46) {
+        setAge("Middle Aged");
+      }
+      if (parseRes >= 60) {
+        setAge("Old");
+      }
+    } catch (error) {
+      console.log(error.message);
+    }
+  };
   // ! User Information
   const getUserInformation = async () => {
     try {
@@ -29,21 +59,260 @@ const plan = () => {
         }
       );
       const parseRes = await response.json();
-      console.log(parseRes);
+      setGender(parseRes.gender);
       setusergoal(parseRes.goal);
     } catch (error) {
       console.log(error.message);
     }
   };
+  const getUserHealth = async () => {
+    try {
+      const response = await fetch(
+        "http://localhost:5000/dashboard/userhealth",
+        {
+          method: "get",
+          headers: {
+            token: localStorage.token,
+          },
+        }
+      );
+      const parseRes = await response.json();
+      setHealth(parseRes);
+    } catch (error) {
+      console.log(error.message);
+    }
+  };
+
   const check = (plans) => {
+    if (plans.health_condition == "Yes") {
+      return plans;
+    }
+  };
+  const checkfemale = (plans) => {
+    if (plans.genders == "female" && plans.health_condition !== "Yes") {
+      return plans;
+    }
+  };
+
+  const buildMucleAdultMale = (plans) => {
     if (
       plans.genders == "male" &&
-      plans.age_group == "Adult" &&
-      plans.plan_type == "Build Muscle"
+      plans.health_condition !== "Yes" &&
+      plans.plan_type == "Build Muscle" &&
+      plans.age_group == "Adult"
     ) {
       return plans;
     }
   };
+
+  const getFitAdultMale = (plans) => {
+    if (
+      plans.genders == "male" &&
+      plans.health_condition !== "Yes" &&
+      plans.plan_type == "Get Fit" &&
+      plans.age_group == "Adult"
+    ) {
+      return plans;
+    }
+  };
+
+  const fatlossAdultMale = (plans) => {
+    if (
+      plans.genders == "male" &&
+      plans.health_condition !== "Yes" &&
+      plans.plan_type == "Fat Loss" &&
+      plans.age_group == "Adult"
+    ) {
+      return plans;
+    }
+  };
+
+  const buildMuscleBabyMale = (plans) => {
+    if (
+      plans.genders == "male" &&
+      plans.health_condition !== "Yes" &&
+      plans.plan_type == "Build Muscle" &&
+      plans.age_group == "Baby"
+    ) {
+      return plans;
+    }
+  };
+
+  const getFitBabyMaleplan = (plans) => {
+    if (
+      plans.genders == "male" &&
+      plans.health_condition !== "Yes" &&
+      plans.plan_type == "Get Fit" &&
+      plans.age_group == "Baby"
+    ) {
+      return plans;
+    }
+  };
+
+  const fatLossBabyplan = (plans) => {
+    if (
+      plans.genders == "male" &&
+      plans.health_condition !== "Yes" &&
+      plans.plan_type == "Fat Loss" &&
+      plans.age_group == "Baby"
+    ) {
+      return plans;
+    }
+  };
+
+  const BuildMuscleMDageplan = (plans) => {
+    if (
+      plans.genders == "male" &&
+      plans.health_condition !== "Yes" &&
+      plans.plan_type == "Build Muscle" &&
+      plans.age_group == "Middle Aged"
+    ) {
+      return plans;
+    }
+  };
+
+  const getFitMdMaleplan = (plans) => {
+    if (
+      plans.genders == "male" &&
+      plans.health_condition !== "Yes" &&
+      plans.plan_type == "Get Fit" &&
+      plans.age_group == "Middle Aged"
+    ) {
+      return plans;
+    }
+  };
+
+  const buildMucleAdultFeMale = (plans) => {
+    if (
+      plans.genders == "female" &&
+      plans.health_condition !== "Yes" &&
+      plans.plan_type == "Build Muscle" &&
+      plans.age_group == "Adult"
+    ) {
+      return plans;
+    }
+  };
+
+  const getFitAdultFeMale = (plans) => {
+    if (
+      plans.genders == "female" &&
+      plans.health_condition !== "Yes" &&
+      plans.plan_type == "Get Fit" &&
+      plans.age_group == "Adult"
+    ) {
+      return plans;
+    }
+  };
+
+  const fatlossAdultFeMale = (plans) => {
+    if (
+      plans.genders == "female" &&
+      plans.health_condition !== "Yes" &&
+      plans.plan_type == "Fat Loss" &&
+      plans.age_group == "Adult"
+    ) {
+      return plans;
+    }
+  };
+
+  const fatLossMdplan = (plans) => {
+    if (
+      plans.genders == "male" &&
+      plans.health_condition !== "Yes" &&
+      plans.plan_type == "Fat Loss" &&
+      plans.age_group == "Middle Aged"
+    ) {
+      return plans;
+    }
+  };
+
+  const buildMuscleBabyFeMale = (plans) => {
+    if (
+      plans.genders == "female" &&
+      plans.health_condition !== "Yes" &&
+      plans.plan_type == "Build Muscle" &&
+      plans.age_group == "Baby"
+    ) {
+      return plans;
+    }
+  };
+
+  const getFitBabyFeMaleplan = (plans) => {
+    if (
+      plans.genders == "female" &&
+      plans.health_condition !== "Yes" &&
+      plans.plan_type == "Get Fit" &&
+      plans.age_group == "Baby"
+    ) {
+      return plans;
+    }
+  };
+
+  const fatLossFeBabyplan = (plans) => {
+    if (
+      plans.genders == "female" &&
+      plans.health_condition !== "Yes" &&
+      plans.plan_type == "Fat Loss" &&
+      plans.age_group == "Baby"
+    ) {
+      return plans;
+    }
+  };
+
+  const BuildMuscleMDageplanFemale = (plans) => {
+    if (
+      plans.genders == "female" &&
+      plans.health_condition !== "Yes" &&
+      plans.plan_type == "Build Muscle" &&
+      plans.age_group == "Middle Aged"
+    ) {
+      return plans;
+    }
+  };
+
+  const getFitMdMaleplanFemale = (plans) => {
+    if (
+      plans.genders == "female" &&
+      plans.health_condition !== "Yes" &&
+      plans.plan_type == "Get Fit" &&
+      plans.age_group == "Middle Aged"
+    ) {
+      return plans;
+    }
+  };
+
+  const fatLossMdplanFemale = (plans) => {
+    if (
+      plans.genders == "female" &&
+      plans.health_condition !== "Yes" &&
+      plans.plan_type == "Fat Loss" &&
+      plans.age_group == "Middle Aged"
+    ) {
+      return plans;
+    }
+  };
+
+  const female = [];
+  const buildMuscleFemaleAdult = [];
+  const getFitFemaleAdult = [];
+  const fatLossFemaleAdult = [];
+  const buildMuscleFemaleBaby = [];
+  const getFitFemaleBaby = [];
+  const FatLossFemaleBaby = [];
+  const MdageBuildMuscleFeMale = [];
+  const MdageGetFitFeMale = [];
+  const MdagefatLossFeMale = [];
+
+  const hcs = [];
+  const adultgetfitPlan = [];
+  const adultMaleBuildMusclePlan = [];
+  const adultFatlossPlan = [];
+  const babyMaleBuildMuscle = [];
+  const babyGetfitPlan = [];
+  const babyFatLossPlan = [];
+  const MdageBuildMuscleMale = [];
+  const MdageGetFitMale = [];
+  const MdagefatLossMale = [];
   // ! Call this function each time when we change goal for user
   const SupplementInfo = async () => {
     try {
@@ -53,10 +322,94 @@ const plan = () => {
       const parseRes = await response.json();
       console.log(parseRes);
       // ! get all plans in individual array
-      const hcs = parseRes.filter(check);
-      console.log(hcs);
+      console.log(age);
+      hcs = parseRes.filter(check);
+
+      female = parseRes.filter(checkfemale);
+      // !!
+      babyMaleBuildMuscle = parseRes.filter(buildMuscleBabyMale);
+      adultMaleBuildMusclePlan = parseRes.filter(buildMucleAdultMale);
+      adultgetfitPlan = parseRes.filter(getFitAdultMale);
+      adultFatlossPlan = parseRes.filter(fatlossAdultMale);
+      babyGetfitPlan = parseRes.filter(getFitBabyMaleplan);
+      babyFatLossPlan = parseRes.filter(fatLossBabyplan);
+      MdageBuildMuscleMale = parseRes.filter(BuildMuscleMDageplan);
+      MdageGetFitMale = parseRes.filter(getFitMdMaleplan);
+      MdagefatLossMale = parseRes.filter(fatLossMdplan);
+
+      buildMuscleFemaleAdult = parseRes.filter(buildMucleAdultFeMale);
+      getFitFemaleAdult = parseRes.filter(getFitAdultFeMale);
+      fatLossFemaleAdult = parseRes.filter(fatlossAdultFeMale);
+      buildMuscleFemaleBaby = parseRes.filter(buildMuscleBabyFeMale);
+      getFitFemaleBaby = parseRes.filter(getFitBabyFeMaleplan);
+      FatLossFemaleBaby = parseRes.filter(fatLossFeBabyplan);
+
+      MdageBuildMuscleFeMale = parseRes.filter(BuildMuscleMDageplanFemale);
+      MdageGetFitFeMale = parseRes.filter(getFitMdMaleplanFemale);
+      MdagefatLossFeMale = parseRes.filter(fatLossMdplanFemale);
+
       // ! Keep if condition here for displaying data
-      setexercises(parseRes);
+      if (Health_Condition == 0) {
+        if (gender == "Male") {
+          if (age == "Adult") {
+            if (goal == "Build Muscle") {
+              setexercises(adultMaleBuildMusclePlan);
+            } else if (goal == "Get Fit") {
+              setexercises(adultgetfitPlan);
+            } else if (goal == "Fat Loss") {
+              setexercises(adultFatlossPlan);
+            }
+          } else if (age == "Baby") {
+            if (goal == "Build Muscle") {
+              setexercises(babyMaleBuildMuscle);
+            } else if (goal == "Get Fit") {
+              setexercises(babyGetfitPlan);
+            } else if (goal == "Fat Loss") {
+              setexercises(babyFatLossPlan);
+            }
+          } else if (age == "Middle Aged") {
+            if (goal == "Build Muscle") {
+              setexercises(MdageBuildMuscleMale);
+            } else if (goal == "Get Fit") {
+              setexercises(MdageGetFitMale);
+            } else if (goal == "Fat Loss") {
+              setexercises(MdagefatLossMale);
+            }
+          } else if (age == "Old") {
+            setexercises(hcs);
+          }
+        } else if (gender == "Female") {
+          if (age == "Adult") {
+            if (goal == "Build Muscle") {
+              setexercises(buildMuscleFemaleAdult);
+            } else if (goal == "Get Fit") {
+              setexercises(getFitFemaleAdult);
+            } else if (goal == "Fat Loss") {
+              setexercises(fatLossFemaleAdult);
+            }
+          } else if (age == "Baby") {
+            if (goal == "Build Muscle") {
+              setexercises(buildMuscleFemaleBaby);
+            } else if (goal == "Get Fit") {
+              setexercises(getFitFemaleBaby);
+            } else if (goal == "Fat Loss") {
+              setexercises(FatLossFemaleBaby);
+            }
+          } else if (age == "Middle Aged") {
+            if (goal == "Build Muscle") {
+              setexercises(MdageBuildMuscleFeMale);
+            } else if (goal == "Get Fit") {
+              setexercises(MdageGetFitFeMale);
+            } else if (goal == "Fat Loss") {
+              setexercises(MdagefatLossFeMale);
+            }
+          } else if (age == "Old") {
+            setexercises(hcs);
+          }
+        }
+      } else {
+        setexercises(hcs);
+      }
     } catch (error) {
       console.log(error.message);
     }
@@ -90,9 +443,19 @@ const plan = () => {
     userGoal(e.target.value);
   };
   useEffect(() => {
+    getUserHealth();
     getUserInformation();
-    SupplementInfo();
+    getUserAge();
   }, []);
+  useEffect(() => {
+    SupplementInfo();
+  }, [Health_Condition, goal, gender, age]);
+
+  // console.log(goal);
+  // console.log(gender);
+
+  // console.log(age);
+
   return (
     <div>
       <Nav buttons={false} verifyContent={true} CurrentPage={2} />

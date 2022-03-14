@@ -30,6 +30,24 @@ router.get("/userinfo", authorization, async (req, res) => {
   }
 });
 
+router.get("/userage", authorization, async (req, res) => {
+  try {
+    const userinfo = await pool.query(
+      "SELECT dob FROM user_info WHERE user_id = $1",
+      [req.user]
+    );
+    const dob = userinfo.rows[0].dob;
+    const year = dob.getFullYear();
+    const d = new Date();
+    let today = d.getFullYear();
+    const age = today - year;
+    res.json(age);
+  } catch (error) {
+    console.error(error.message);
+    res.status(500).json("Server error");
+  }
+});
+
 // ? APi for user Information Insertion
 router.post("/userinfo", authorization, async (req, res) => {
   try {
