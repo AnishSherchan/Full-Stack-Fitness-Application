@@ -292,7 +292,6 @@ const plan = () => {
     }
   };
 
-  const female = [];
   const buildMuscleFemaleAdult = [];
   const getFitFemaleAdult = [];
   const fatLossFemaleAdult = [];
@@ -325,7 +324,6 @@ const plan = () => {
       console.log(age);
       hcs = parseRes.filter(check);
 
-      female = parseRes.filter(checkfemale);
       // !!
       babyMaleBuildMuscle = parseRes.filter(buildMuscleBabyMale);
       adultMaleBuildMusclePlan = parseRes.filter(buildMucleAdultMale);
@@ -473,7 +471,7 @@ const plan = () => {
             className="md:text-3xl grayscale text-md bg-fixed bg-no-repeat bg-cover bg-top bg-[url('https://image-cdn.essentiallysports.com/wp-content/uploads/undertaker-wrestlemania.png')]  tracking-widest"
             style={contentStyle}
           >
-            ❝ GO HARD or GO Hell ❞
+            ❝ GO HARD or GO HOME ❞
           </h3>
         </div>
         <div>

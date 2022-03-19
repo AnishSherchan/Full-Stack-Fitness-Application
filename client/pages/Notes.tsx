@@ -2,7 +2,6 @@ import React, { useState, useEffect } from "react";
 import Verify from "./HOC/Verify";
 import ListNotes from "../src/components/Notes";
 import { Form, Input, Button } from "antd";
-import { ContactsOutlined } from "@ant-design/icons";
 import Nav from "../src/components/AppHeader/Header";
 const Notes = () => {
   const [form] = Form.useForm();

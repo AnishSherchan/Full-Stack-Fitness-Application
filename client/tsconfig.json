@@ -32,7 +32,9 @@
     "pages/dashboard.js",
     "pages/admin/Users/index.js",
     "pages/exercise.JS",
-    "pages/plan.js"
+    "pages/plan.js",
+    "pages/plan/[id]/index.js",
+    "pages/plan/[id]/index.js"
   ],
   "exclude": ["node_modules"]
 }

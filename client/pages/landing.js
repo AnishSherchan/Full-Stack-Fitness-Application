@@ -19,7 +19,7 @@ const landing = () => {
       <Carousel autoplay effect="fade">
         <div>
           <h3
-            className="md:text-3xl  font-bold  bg-fixed bg-no-repeat bg-cover bg-top bg-[url('https://wallpaperaccess.com/full/1097428.jpg')] text-md  tracking-widest"
+            className=" md:text-3xl  font-bold  bg-fixed bg-no-repeat bg-cover bg-top bg-[url('https://wallpaperaccess.com/full/1097428.jpg')] text-md  tracking-widest"
             style={contentStyle}
           >
             ❝ WELCOME TO GUARDIAN FITNESS ❞

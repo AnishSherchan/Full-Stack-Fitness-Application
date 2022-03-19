@@ -271,5 +271,19 @@ router.get("/plan", async (req, res) => {
     res.status(500).json("Server error");
   }
 });
+// ? Plan Informartion of specific id
+router.post("/specPlan", async (req, res) => {
+  try {
+    const { id } = req.body;
+    //?  insert user data
+    const Plan = await pool.query("SELECT * FROM plan WHERE plan_id = ($1);", [
+      id,
+    ]);
+    res.json(Plan.rows[0]);
+  } catch (error) {
+    console.error(error.message);
+    res.status(500).json("Server error");
+  }
+});
 
 module.exports = router;
