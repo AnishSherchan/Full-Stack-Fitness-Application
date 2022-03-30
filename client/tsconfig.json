@@ -34,7 +34,8 @@
     "pages/exercise.JS",
     "pages/plan.js",
     "pages/plan/[id]/index.js",
-    "pages/plan/[id]/index.js"
+    "pages/plan/[id]/index.js",
+    "src/components/Khalti/khalti.js"
   ],
   "exclude": ["node_modules"]
 }

@@ -170,8 +170,8 @@ const ExerciseAdmin = () => {
               <a className="text-white">User panel</a>
             </Link>
           </div>
-          <div className="md:flex md:flex-col md:items-center ">
-            <div className="h-fitcontent p-5 md:w-11/12 md:bg-navcolor rounded-3xl drop-shadow-2xl mb-6 md:mt-11">
+          <div className="md:flex md:flex-col overflow-scroll md:items-center ">
+            <div className="h-fitcontent p-5 w-fit  md:w-11/12 md:bg-navcolor rounded-3xl drop-shadow-2xl mb-6 md:mt-11">
               <p className="text-center text-xl">Exercise</p>
               <Table
                 title={() => "Edit Exercise"}
@@ -181,7 +181,7 @@ const ExerciseAdmin = () => {
               />
             </div>
           </div>
-          \
+
           <Modal
             title="Edit Exercise"
             visible={isEditing}

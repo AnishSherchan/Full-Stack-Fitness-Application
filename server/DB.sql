@@ -73,3 +73,10 @@ CREATE Table user_notes(
     user_id uuid,
     FOREIGN KEY(user_id) REFERENCES users(user_id)
 );
+
+CREATE Table user_plan(
+    user_id uuid,
+    FOREIGN KEY(user_id) REFERENCES users(user_id),
+    plan_id integer,
+    FOREIGN KEY(plan_id) REFERENCES plan(plan_id)
+);
