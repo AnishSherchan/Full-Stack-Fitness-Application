@@ -285,5 +285,52 @@ router.post("/specPlan", async (req, res) => {
     res.status(500).json("Server error");
   }
 });
+// ? UserPlan
+router.get("/userPlan", authorization, async (req, res) => {
+  try {
+    const userplan = await pool.query(
+      "SELECT * FROM user_plan WHERE user_id = $1",
+      [req.user]
+    );
+    res.json(userplan.rows[0]);
+  } catch (error) {
+    console.error(error.message);
+    res.status(500).json("Server error");
+  }
+});
+
+router.post("/userPlan", authorization, async (req, res) => {
+  try {
+    //? destructure req.body
+    const { plan_id } = req.body;
+    const user_id = req.user;
+    //?  insert user data
+
+    const userplan = await pool.query(
+      "SELECT * FROM user_plan WHERE user_id = ($1)",
+      [user_id]
+    );
+    if (userplan.rowCount > 0) {
+      const Delpan = await pool.query(
+        "DELETE FROM user_plan WHERE user_id = ($1)",
+        [user_id]
+      );
+      let newplan = await pool.query(
+        "INSERT INTO user_plan (user_id, plan_id ) VALUES ($1, $2) RETURNING *",
+        [user_id, plan_id]
+      );
+      res.json(newplan.rows[0]);
+    } else {
+      let newplan = await pool.query(
+        "INSERT INTO user_plan (user_id, plan_id ) VALUES ($1, $2) RETURNING *",
+        [user_id, plan_id]
+      );
+      res.json(newplan.rows[0]);
+    }
+  } catch (error) {
+    console.log(error.message);
+    res.status(5000).json("Server Error");
+  }
+});
 
 module.exports = router;

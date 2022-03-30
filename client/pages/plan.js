@@ -13,6 +13,7 @@ const plan = () => {
     textAlign: "center",
   };
   // ? Plan filtering datas
+  const [ids, setcurrentPlan] = useState(0);
   const [goal, setusergoal] = useState("");
   const [Health_Condition, setHealth] = useState(null);
   const [gender, setGender] = useState("");
@@ -416,8 +417,8 @@ const plan = () => {
   const handleChange = (e) => {
     setSearch(e.target.value);
   };
-  const filteredexercise = exercises.filter((supplement) =>
-    supplement.plan_name.toLowerCase().includes(search.toLowerCase())
+  const filteredexercise = exercises.filter((plan) =>
+    plan.plan_name.toLowerCase().includes(search.toLowerCase())
   );
 
   const userGoal = async (selectedgoal) => {
@@ -440,10 +441,26 @@ const plan = () => {
     setusergoal(e.target.value);
     userGoal(e.target.value);
   };
+  const IsCurrentPlan = async () => {
+    try {
+      const response = await fetch("http://localhost:5000/dashboard/userPlan", {
+        method: "get",
+        headers: {
+          token: localStorage.token,
+        },
+      });
+      const parseRes = await response.json();
+      setcurrentPlan(parseRes.plan_id);
+    } catch (error) {
+      console.log(error.message);
+    }
+  };
+
   useEffect(() => {
     getUserHealth();
     getUserInformation();
     getUserAge();
+    IsCurrentPlan();
   }, []);
   useEffect(() => {
     SupplementInfo();
@@ -512,7 +529,7 @@ const plan = () => {
           </div>
 
           <div className="bg-primaryButton w-fit h-fit p-1 py-2 rounded-xl m-3">
-            <Link href="/admin">
+            <Link href="/plan/[id]" as={`/plan/${ids}`}>
               <a className="text-white text-center text-lg px-7">
                 Continue Your Current Plan
               </a>
@@ -539,17 +556,17 @@ const plan = () => {
           // ? wokrout plans components
         }
         <div className="flex flex-wrap justify-evenly">
-          {filteredexercise.map((supplement) => {
+          {filteredexercise.map((plan) => {
             return (
-              <Link href="/plan/[id]" as={`/plan/${supplement.plan_id}`}>
+              <Link href="/plan/[id]" as={`/plan/${plan.plan_id}`}>
                 <a className="cursor-default">
                   <PlanInfo
-                    key={supplement.plan_id}
-                    id={supplement.plan_id}
-                    duration={supplement.plan_duration}
-                    title={supplement.plan_name}
-                    type={supplement.plan_type}
-                    premium={supplement.permium}
+                    key={plan.plan_id}
+                    id={plan.plan_id}
+                    duration={plan.plan_duration}
+                    title={plan.plan_name}
+                    type={plan.plan_type}
+                    premium={plan.permium}
                   />
                 </a>
               </Link>

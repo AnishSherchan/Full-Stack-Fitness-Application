@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useRouter } from "next/router";
+import { toast } from "react-toastify";
 import Verify from "../../HOC/Verify";
 import { Carousel } from "antd";
 import Nav from "../../../src/components/AppHeader/Header";
@@ -12,6 +13,8 @@ const index = () => {
   const [workingdays, setWorkingdays] = useState("");
   const [gender, setGender] = useState("");
   const [url, setUrl] = useState("");
+  const [currentPlan, setcurrentPlan] = useState(0);
+  const [plan_id, setPlanid] = useState(0);
   const { id } = router.query;
   const contentStyle = {
     height: "290px",
@@ -19,6 +22,54 @@ const index = () => {
     lineHeight: "290px",
     textAlign: "center",
   };
+
+  const SelectPlan = async () => {
+    let plan_id = id;
+    try {
+      const body = { plan_id };
+      const response = await fetch("http://localhost:5000/dashboard/userPlan", {
+        method: "POST",
+        headers: {
+          token: localStorage.token,
+          "Content-type": "application/json",
+        },
+        body: JSON.stringify(body),
+        // ? converting object to json
+      });
+
+      const parseRes = await response.json();
+      if (parseRes) {
+        toast.success("Plan Selected Successfully", {
+          position: "top-center",
+          autoClose: 3000,
+          hideProgressBar: true,
+          closeOnClick: true,
+          pauseOnHover: false,
+          draggable: true,
+          progress: undefined,
+        });
+      }
+      console.log(parseRes);
+    } catch (error) {
+      console.log(error.message);
+    }
+  };
+
+  const IsCurrentPlan = async () => {
+    try {
+      const response = await fetch("http://localhost:5000/dashboard/userPlan", {
+        method: "get",
+        headers: {
+          token: localStorage.token,
+        },
+      });
+      const parseRes = await response.json();
+      setcurrentPlan(parseRes.plan_id);
+    } catch (error) {
+      console.log(error.message);
+    }
+  };
+
   const PlanData = async () => {
     try {
       const body = { id };
@@ -45,6 +96,7 @@ const index = () => {
   };
   useEffect(() => {
     PlanData();
+    IsCurrentPlan();
   }, [id]);
   return (
     <div>
@@ -93,11 +145,18 @@ const index = () => {
 
       <div className=" px-5 ">
         <h1 className="text-center heading mt-3 text-3xl">{planName}</h1>
-        <div className="flex justify-end">
-          <div className="bg-primaryButton w-fit h-fit p-1 py-2 rounded-xl m-3">
-            <a className="text-white text-center text-lg px-7">Select Plan</a>
+        {currentPlan != id && (
+          <div className="flex justify-end">
+            <div className="bg-primaryButton w-fit h-fit p-1 py-2 rounded-xl m-3">
+              <a
+                onClick={SelectPlan}
+                className="text-white text-center text-lg px-7"
+              >
+                Select Plan
+              </a>
+            </div>
           </div>
-        </div>
+        )}
         <div className="md:flex md:flex-col my-4 md:pb-5 md:items-center">
           <div className="h-fitcontent md:w-8/12 md:py-3 py-2 border-4 border-t-back bg-navcolor rounded-3xl drop-shadow-2xl md:mt-11">
             <h1 className="text-2xl font-bold mt-3 px-10 text-center ">
