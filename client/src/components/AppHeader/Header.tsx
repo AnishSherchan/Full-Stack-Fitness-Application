@@ -104,6 +104,16 @@ const Header = (props: Props) => {
                         Supplement
                       </a>
                     </Link>
+                    <Link href="/meal">
+                      <a
+                        style={
+                          props.CurrentPage === 5 ? { color: "#4B8CF6" } : {}
+                        }
+                        className="block px-3 text-xl text-black"
+                      >
+                        Meal Plan
+                      </a>
+                    </Link>
 
                     <Link href="/">
                       <button onClick={Click} className="px-3 cursor-pointer">
@@ -210,6 +220,9 @@ const Header = (props: Props) => {
 
                     <Link href="/supplements">
                       <a className="block text-xl text-black">Supplement</a>
+                    </Link>
+                    <Link href="/meal">
+                      <a className="block text-xl text-black">Meal Plan</a>
                     </Link>
 
                     <Link href="/">
