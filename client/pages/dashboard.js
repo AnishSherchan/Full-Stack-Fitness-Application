@@ -570,7 +570,7 @@ const dashboard = () => {
                   style={{ height: "30px" }}
                   src="https://cdn-icons.flaticon.com/png/128/3746/premium/3746552.png?token=exp=1646651311~hmac=022cda9eb744ac2545aaaed68df57b52"
                 ></img>{" "}
-                Weight : {weight} kgs
+                Weight : {weight} kg
               </p>
               <p className="items-center flex text-lg text-center md:text-left">
                 <img

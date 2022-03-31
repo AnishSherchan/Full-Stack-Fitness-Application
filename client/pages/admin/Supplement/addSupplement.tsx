@@ -112,7 +112,7 @@ const addSupplement = () => {
             </Link>
           </div>
           <div>
-            <div className="md:flex md:flex-col md:items-center ">
+            <div className="md:flex md:flex-col  md:items-center ">
               <h1 className="text-xl heading mt-5">
                 Add Supplements Information
               </h1>
@@ -184,7 +184,7 @@ const addSupplement = () => {
                   </Form.Item>
 
                   <Form.Item
-                    name="protien"
+                    name="Protein"
                     label="Protien pre serving"
                     rules={[{ required: true }]}
                   >

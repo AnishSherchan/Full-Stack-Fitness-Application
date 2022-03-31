@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import Image from "next/image";
+
 import Verify from "./HOC/Verify";
 import PlanInfo from "../src/components/Plan";
 import { Radio, Input, Carousel } from "antd";

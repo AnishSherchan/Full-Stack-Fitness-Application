@@ -170,7 +170,7 @@ const addExercise = () => {
                     label="Equipment Required"
                     rules={[{ required: true }]}
                   >
-                    <Select placeholder="Select Equiplemnt" allowClear>
+                    <Select placeholder="Select Equipment" allowClear>
                       <Option value="Dumbbell">Dumbbell</Option>
                       <Option value="Barbell">Barbell</Option>
                       <Option value="Machine">Machine</Option>

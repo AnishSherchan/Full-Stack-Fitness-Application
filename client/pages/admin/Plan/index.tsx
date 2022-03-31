@@ -175,24 +175,28 @@ const PlanAdmin = () => {
         <Header style={{ backgroundColor: "#F3F6F7" }}>
           <h1 className="text-xl text-center p-4">Workout Plans</h1>
         </Header>
-        <Content style={{ backgroundColor: "#e1e5e8" }}>
-          <div className="fixed bg-primaryButton p-1 px-4 rounded-xl z-10 bottom-0 right-0 m-3">
-            <Link href="/dashboard">
-              <a className="text-white">User panel</a>
-            </Link>
-          </div>
-          <div className="md:flex md:flex-col md:items-center ">
-            <div className="h-fitcontent p-5 md:w-11/12 md:bg-navcolor rounded-3xl drop-shadow-2xl mb-6 md:mt-11">
-              <p className="text-center text-xl">Workout Plans</p>
-              <Table
-                title={() => "Edit Plan"}
-                bordered
-                columns={columns}
-                dataSource={exercises}
-              />
+        <Content>
+          <div className="bg-white laptop:bg-transparent">
+            <div className="fixed bg-primaryButton p-1 px-4 rounded-xl z-10 bottom-0 right-0 m-3">
+              <Link href="/dashboard">
+                <a className="text-white">User panel</a>
+              </Link>
+            </div>
+            <div className="md:flex md:flex-col overflow-scroll md:items-center ">
+              <div className="h-fitcontent p-5 md:w-11/12 md:bg-navcolor rounded-3xl drop-shadow-2xl mb-6 md:mt-11">
+                <p className="text-center text-xl">Workout Plans</p>
+                <div className="w-fit">
+                  <Table
+                    title={() => "Edit Plan"}
+                    bordered
+                    columns={columns}
+                    dataSource={exercises}
+                  />
+                </div>
+              </div>
             </div>
           </div>
-          \
+
           <Modal
             title="Edit Exercise"
             visible={isEditing}
