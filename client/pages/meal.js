@@ -35,7 +35,7 @@ const Meal = () => {
   }, []);
 
   return (
-    <div className="App">
+    <div className="App pb-4">
       <Nav buttons={false} verifyContent={true} CurrentPage={5} />
       <Carousel autoplay effect="fade">
         <div className="">
