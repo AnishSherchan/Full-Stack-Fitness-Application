@@ -90,7 +90,7 @@ const Header = (props: Props) => {
                         }
                         className="block px-3 text-xl text-black"
                       >
-                        Exercise Guid
+                        Exercise Guide
                       </a>
                     </Link>
 
@@ -215,7 +215,7 @@ const Header = (props: Props) => {
                     </Link>
 
                     <Link href="/exercise">
-                      <a className="block text-xl text-black">Exercise Guid</a>
+                      <a className="block text-xl text-black">Exercise Guide</a>
                     </Link>
 
                     <Link href="/supplements">

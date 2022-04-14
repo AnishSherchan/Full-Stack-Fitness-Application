@@ -82,7 +82,7 @@ const addSupplement = () => {
         }
       );
       const parseRes = await response.json();
-      let next = 1;
+      let next = 2;
       next += parseRes.length;
       setId(next);
     } catch (error) {
