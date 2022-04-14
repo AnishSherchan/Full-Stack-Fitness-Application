@@ -90,7 +90,7 @@ const Header = (props: Props) => {
                         }
                         className="block px-3 text-xl text-black"
                       >
-                        Exercise Guid
+                        Exercise Guide
                       </a>
                     </Link>
 
@@ -102,6 +102,16 @@ const Header = (props: Props) => {
                         className="block px-3 text-xl text-black"
                       >
                         Supplement
+                      </a>
+                    </Link>
+                    <Link href="/meal">
+                      <a
+                        style={
+                          props.CurrentPage === 5 ? { color: "#4B8CF6" } : {}
+                        }
+                        className="block px-3 text-xl text-black"
+                      >
+                        Meal Plan
                       </a>
                     </Link>
 
@@ -205,11 +215,14 @@ const Header = (props: Props) => {
                     </Link>
 
                     <Link href="/exercise">
-                      <a className="block text-xl text-black">Exercise Guid</a>
+                      <a className="block text-xl text-black">Exercise Guide</a>
                     </Link>
 
                     <Link href="/supplements">
                       <a className="block text-xl text-black">Supplement</a>
+                    </Link>
+                    <Link href="/meal">
+                      <a className="block text-xl text-black">Meal Plan</a>
                     </Link>
 
                     <Link href="/">

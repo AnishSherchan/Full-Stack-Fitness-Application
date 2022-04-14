@@ -9,6 +9,7 @@ const ExerciseAdmin = () => {
   const { Header, Sider, Content } = Layout;
   const [exercises, setexercises] = useState([]);
   const [isEditing, setIsEditing] = useState(false);
+  // ! Here editing Student simply means editing exercise
   const [editingStudent, setEditingStudent] = useState(null);
 
   const EditExercise = async (
@@ -40,6 +41,7 @@ const ExerciseAdmin = () => {
       console.log(error.message);
     }
   };
+  // ! Here Student simply means Exercise
   const onDeleteStudent = async (record) => {
     Modal.confirm({
       title: "Are you sure, you want to delete this Exercise?",
@@ -76,6 +78,7 @@ const ExerciseAdmin = () => {
       },
     });
   };
+  // ! Here Student simply means Exercise
   const onEditStudent = (record) => {
     setIsEditing(true);
     setEditingStudent({ ...record });

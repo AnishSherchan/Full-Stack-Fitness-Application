@@ -120,6 +120,12 @@ const admindashboard = () => {
             </Header>
           </div>
           <Content style={{ backgroundColor: "#e1e5e8" }}>
+            <h1 className="text-2xl mt-5 mb-0 md:px-8 text-center md:text-left heading ">
+              Hello Admin 👋
+            </h1>
+            <h1 className="text-xl hidden md:block  text-gray-600  mb-0 py-4 px-8 heading">
+              Here's what we have for today !
+            </h1>
             <div className="flex flex-col justify-items-center items-center  ">
               <div className="rounded-3xl drop-shadow-2xl w-10/12 mt-5 pb-6  bg-adminDash">
                 <div className="flex flex-wrap justify-evenly ">

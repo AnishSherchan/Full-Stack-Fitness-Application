@@ -65,8 +65,9 @@ const landing = () => {
               height={229}
             />
           </div>
-          <Link href="/Authentication/Register">
-            <div className=" pt-8 pl-36 hover:drop-shadow-xl ">
+
+          <div className=" pt-8 ml-10 md:ml-32 flex flex-wrap ">
+            <Link href="/Authentication/Register">
               <Button
                 style={{
                   backgroundColor: "#607fe8",
@@ -79,8 +80,33 @@ const landing = () => {
               >
                 <p className="text-lg pt-1 text-white">JOIN NOW !</p>
               </Button>
+            </Link>
+            <div className="hidden md:block ml-5">
+              <Link href="/Authentication/Register">
+                <Button
+                  style={{
+                    backgroundColor: "#474C52",
+                    borderRadius: "10px",
+                    height: "50px",
+                    width: "135px",
+                    marginLeft: "10px",
+                    boxShadow: "1px 1px grey",
+                    border: "none",
+                  }}
+                >
+                  <p className="text-lg pt-1 text-white">Learn More</p>
+                </Button>
+              </Link>
             </div>
-          </Link>
+          </div>
+          <div className="hidden md:flex md:flex-wrap mt-14 ml-32">
+            <Image
+              src="/icons/landingText.svg"
+              alt="Logo"
+              width={320}
+              height={96}
+            />
+          </div>
         </div>
         <h1>
           <div className="landingImg pt-16 ">

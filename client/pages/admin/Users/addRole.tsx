@@ -60,6 +60,16 @@ const addRole = () => {
             progress: undefined,
           });
         } catch (error) {
+          onReset();
+          toast.error("User Not Found!", {
+            position: "top-center",
+            autoClose: 3000,
+            hideProgressBar: true,
+            closeOnClick: true,
+            pauseOnHover: false,
+            draggable: true,
+            progress: undefined,
+          });
           console.log(error.message);
         }
       } else {

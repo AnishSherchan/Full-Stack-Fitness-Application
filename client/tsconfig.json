@@ -35,7 +35,8 @@
     "pages/plan.js",
     "pages/plan/[id]/index.js",
     "pages/plan/[id]/index.js",
-    "src/components/Khalti/khalti.js"
+    "src/components/Khalti/khalti.js",
+    "pages/meal.js"
   ],
   "exclude": ["node_modules"]
 }

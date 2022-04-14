@@ -15,7 +15,7 @@ export default function Home() {
   // ! Secure routes for navigation
   return (
     <div>
-      <Landing />
+      <Landing />{" "}
     </div>
   );
 }

@@ -508,6 +508,16 @@ const plan = () => {
           </h3>
         </div>
       </Carousel>
+      <div className="mb-7">
+        <h1 className="text-center heading text-3xl tracking-widest font-bold text-primaryButton">
+          WORKOUT PLANS
+        </h1>
+        <h1 className="text-xl tracking-wide text-center heading ">
+          The most comprehensive database of free workout plans anywhere!{" "}
+          <br></br>
+          Download workout plans any goal or experience level. 🏋️
+        </h1>
+      </div>
       <div className=" px-5 ">
         <h1 className="text-center heading text-3xl">Your Plans</h1>
         <div className="flex flex-wrap justify-around items-center mb-4">
